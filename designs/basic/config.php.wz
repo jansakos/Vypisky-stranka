@@ -1,0 +1,12 @@
+<?php
+$DB_SERVER='sql2.webzdarma.cz';
+$DB_USERNAME='jaroskavypis8677';
+$DB_PASSWORD='Prava233211';
+$DB_NAME='jaroskavypis8677';
+
+$link = mysqli_connect($DB_SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
+
+if($link == false) {
+	die("CHYBA: Připojení k databázi neproběhlo!".mysqli_connect_error());
+}
+?>

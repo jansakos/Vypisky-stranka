@@ -1,0 +1,58 @@
+﻿0.8	Huge update
+
+HOTOVO
+Rozdělení stránky na části
+Přidání ikonek
+Odstranění diakritiky z nahrávaných souborů
+Při více souborech přidat číslo
+Podpora custom designů (obsáhlá) - php include na všechen text
+PWA
+ServiceWorkers
+Chatroom - dělení data
+Chatroom - obrázky, hypertexťáky
+Odstranění předešlých nápisů
+Redesign nastavení účtu
+Upravit informace na stránce
+Odstraněn bookmark
+Odstraňování scrollbaru bez výpisků
+Automatické tázání na PWA
+Zprovoznit tlačítko o odsouhlasení
+Přidat zobrazení nápovědy do nastavení
+-----------------
+
+DO TÉTO VERZE - tato
+Notifikační zvonek
+Nastavitelný design (měnné v databázi)
+Udělat stránku rychlého přehledu
+	Diář
+	Oznámení
+Mazání zpráv v Chatroom
+Obrázky v chatroom přes soubory
+-----------------
+
+
+BLÍZKÁ BUDOUCNOST - příští
+Redesign download sekce (kromě tabulky)
+mazaní vlastních Výpisků
+Optimalizace https
+Lepší Autoscroll Chatroom
+CleanUp kódu (odřádkování)
+Notifikace na Chatroom + nahrávání Výpisků
+Vypínání push notifikací
+-----------------
+
+SLOŽITÉ - někdy
+Implementace suplování
+Přidat design
+CleanUp kódu (debordelizace)
+Crossing over it
+-----------------
+
+NAVRHOVANÉ - spíše ne
+-----------------
+
+ZRUŠENÉ
+Aplikace [zavedení PWA]
+bugtracker [není třeba]
+Bugování obrázků [pouze obrázky z localhostu, norm. nedostupné]
+asciimoji [před zavedením obrázků]

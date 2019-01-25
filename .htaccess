@@ -1,0 +1,11 @@
+ErrorDocument 400 /error/e400.php
+ErrorDocument 401 /error/e401.php
+ErrorDocument 403 /error/e403.php
+ErrorDocument 404 /error/e404.php
+ErrorDocument 409 /error/e409.php
+ErrorDocument 410 /error/e410.php
+ErrorDocument 500 /error/e500.php
+ErrorDocument 501 /error/e501.php
+ErrorDocument 502 /error/e502.php
+ErrorDocument 503 /error/e503.php
+ErrorDocument 504 /error/e504.php
