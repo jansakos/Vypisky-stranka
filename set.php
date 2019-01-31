@@ -24,12 +24,12 @@
 	?>
    
 <br><br><br><br><br>	
-<form role="form" method="post" action="set.php" autocomplete="off">
+<form method="post" action="set.php" autocomplete="off">
     <div class="container">   
         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Staré heslo:</label>
 
-					<input width="90%" type="text" name="oldpassword" class="form-control">
+					<input type="text" name="oldpassword" class="form-control">
 
                 <span class="help-block"><?php echo $password_err; ?></span>
         </div>
@@ -37,7 +37,7 @@
 		<div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Nové heslo:</label>
 
-					<input width="100%" type="password" name="newpassword" class="form-control">
+					<input type="password" name="newpassword" class="form-control">
 
                 <span class="help-block"><?php echo $password_err; ?></span>
         </div>
@@ -45,7 +45,7 @@
 		<div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Potvrzení nového hesla:</label>
 
-					<input width="100%" type="password" name="confpassword" class="form-control">
+					<input type="password" name="confpassword" class="form-control">
 
                 <span class="help-block"><?php echo $password_err; ?></span>
         </div>
@@ -68,7 +68,7 @@
 	</div>
 	<hr>
 	<div class="container">
-		<a type="button" href="first.php" class="btn btn-primary btn-lg btn-block">Zobrazit nápovědu</a>
+		<a href="first.php" class="btn btn-primary btn-lg btn-block">Zobrazit nápovědu</a>
 	</div>
 	<br>
 		<?php

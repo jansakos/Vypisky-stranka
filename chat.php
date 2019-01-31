@@ -67,12 +67,12 @@
 
 <div id="r">
 		<div class="container">
-			<div class="row centered"><centered>
+			<div class="row centered">
 				<div class="col-lg-8 col-lg-offset-2">
 					<?php
 						include("/parts/crfoot.php");
 					?>
-				</div></centered>
+				</div>
 			</div>
 		</div>
 	</div>

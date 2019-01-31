@@ -25,7 +25,7 @@
 			<div class="form-group">
                 <label>Uživatelské jméno:</label>
 
-					<input width="100%" type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+					<input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
 
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div> 
@@ -33,7 +33,7 @@
             <div class="form-group">
                 <label>Heslo:</label>
 			
-					<input width="100%" type="password" name="password" class="form-control">
+					<input type="password" name="password" class="form-control">
 
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>

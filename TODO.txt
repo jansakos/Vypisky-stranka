@@ -18,20 +18,21 @@ Odstraňování scrollbaru bez výpisků
 Automatické tázání na PWA
 Zprovoznit tlačítko o odsouhlasení
 Přidat zobrazení nápovědy do nastavení
+Opraveno vystředění u dodatků
 -----------------
 
 DO TÉTO VERZE - tato
-Notifikační zvonek
 Nastavitelný design (měnné v databázi)
 Udělat stránku rychlého přehledu
 	Diář
 	Oznámení
 Mazání zpráv v Chatroom
-Obrázky v chatroom přes soubory
+Obrázky v Chatroom přes soubory
 -----------------
 
 
 BLÍZKÁ BUDOUCNOST - příští
+Notifikační zvonek
 Redesign download sekce (kromě tabulky)
 mazaní vlastních Výpisků
 Optimalizace https

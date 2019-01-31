@@ -43,9 +43,9 @@ if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSIO
 		}
 		
 		//Name confirm
-		if(empty(trim($_POST['name']))){    
+		if(empty(trim($_POST['nameht']))){    
 		}else{
-        $name = trim($_POST['name']);
+        $name = trim($_POST['nameht']);
 		}
 	
 		//MySQL

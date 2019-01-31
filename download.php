@@ -43,7 +43,7 @@
 	<div class="container-w">
 	
 	<div class="table-responsive">
-		<table class="table table-hover">
+	<table class='table table-hover'>
 		<?php
 		if (mysqli_num_rows($query)!=0){
 			$dir = "assets/files/vypisky/";
@@ -96,19 +96,20 @@
 		}
 			}
 		}else{
-			echo"<div class='centered'><h3>Nejsou k dispozici žádné výpisky</h3></div>";
+			echo"</table><div class='centered'><h3>Nejsou k dispozici žádné výpisky</h3></div><table>";
 			}
 		?>
-		</table><br>
+		</table></div>
+		<br>
 
 		<?php
 			if(($_SESSION['permission']) == "o" || ($_SESSION['permission']) == "w" || ($_SESSION['permission']) == "u"){
-		echo "<div class='centered'><a type='button' class='btn btn-primary btn-sm' href='upload.php'>Nahrát výpisky</a><br></div>";
+		echo "<div class='centered'><a class='btn btn-primary btn-sm' href='upload.php'>Nahrát výpisky</a><br></div>";
 			}
 ?>
 		<div class="centered">
-		<h3><a href="http://archiv-vypisky.chytrak.cz">Archiv starších výpisků</a><h3><br>
-		</div></div>
+		<h3><a href="http://archiv-vypisky.chytrak.cz">Archiv starších výpisků</a></h3><br>
+		</div>
 	</div>
 	
 	

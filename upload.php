@@ -28,16 +28,15 @@
 	<div class="container w">
 	<div class="row centered">
 	<div class="wrapper">
+	<h2>Nahrání souboru do Výpisků:</h2>
 		<form action='up.php' method='post' enctype='multipart/form-data'>
-			<h2>Nahrání souboru do Výpisků:</h2>
 			
 			<div class="form-group">
-			<center>
-			<input type='file' class="btn btn-default" name='fileToUpload' id='fileToUpload'><br>
-			</center>
+				<div class="col-lg-4 col-lg-offset-4">
+					<input type='file' class="btn btn-default" name='fileToUpload' id='fileToUpload'>
+				</div>
 			</div>
 			
-			<center>
             <div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="NazevForm">Název:</label>
@@ -47,26 +46,27 @@
 				
 				<div class="form-group col-md-4">
 					<label for="PredmetForm">Předmět:</label>
-					<?php
-						include("/parts/upsubj.php");
-					?>
+					<select id="PredmetForm" class="form-control" name="subject">
+						<?php
+							include("/parts/upsubj.php");
+						?>
+					</select>
 				</div>
 			</div>
 		<div class="form-group col-md-1">
 					<label> </label>
 					<input type='submit' class="btn btn-primary" value='Nahrát soubor' name='submit'>
 				</div>
-			</div>
-		</form>
-	</div>
+			</form>
+		</div>
 	</div>
 	</div>
 	
 	<div class="container w">
 	<div class="row centered">
 	<div class="wrapper">
+	<h2>Nahrání hypertextového odkazu do Výpisků:</h2>
 		<form action='updress.php' method='post' enctype='multipart/form-data'>
-			<h2>Nahrání hypertextového odkazu do Výpisků:</h2>
 					
 			<div class="form-group">
 				<label for="AdresaForm">Adresa URL:</label>
@@ -76,19 +76,20 @@
 			
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="NazevForm">Název:</label>
-					<input type="text" autocomplete="off" class="form-control" placeholder="Zadejte název" name="name" id="NazevForm">
+					<label for="NazevHT">Název:</label>
+					<input type="text" autocomplete="off" class="form-control" placeholder="Zadejte název" name="nameht" id="NazevHT">
 					<span class="help-block"></span>
 				</div>
 				
 				<div class="form-group col-md-4">
-					<label for="PredmetForm">Předmět:</label>
-					<?php
-						include("/parts/upsubj.php");
-					?>
+					<label for="PredmetHT">Předmět:</label>
+					<select id="PredmetHT" class="form-control" name="subject">
+						<?php
+							include("/parts/upsubj.php");
+						?>
+					</select>
 				</div>
 				<div class="form-group col-md-1">
-					<label> </label>
 					<input type='submit' class="btn btn-primary" value='Nahrát odkaz' name='submit'>
 				</div>
 			</div>

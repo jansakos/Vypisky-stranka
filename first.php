@@ -74,7 +74,7 @@
 				<p>Sekce, do které se dostanete, když kliknete dole na stránce na verzi. Jedná se pouze o změny, které na stránce proběhly.</p>
 			</div>
 		</div>
-		<a type="button" href="1done.php" class="btn btn-primary btn-lg btn-block">Rozumím, přejít na stránku.</a>
+		<a href="1done.php" class="btn btn-primary btn-lg btn-block">Rozumím, přejít na stránku.</a>
 		<br>
 		<br>
 	</div>

@@ -5,7 +5,7 @@
 		<h2>Až to doděláme, tak Vám dáme vědět.</h2><br>
 	</div>
 </div>
-	<p align="center"><img width= 100% src="assets/imgs/WIP.jpg" /></p>
+	<p><img width="100%" src="assets/imgs/WIP.jpg" alt="Under constraction" /></p>
 	
 	<div id="r">
 		<div class="container">
