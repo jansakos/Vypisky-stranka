@@ -74,7 +74,9 @@
 				<p>Sekce, do které se dostanete, když kliknete dole na stránce na verzi. Jedná se pouze o změny, které na stránce proběhly.</p>
 			</div>
 		</div>
-		<a href="1done.php" class="btn btn-primary btn-lg btn-block">Rozumím, přejít na stránku.</a>
+		<form action='first.php' method='post' enctype='multipart/form-data'> 
+			<input type="submit" class="btn btn-primary btn-lg btn-block" value="Rozumím, přejít na stránku.">
+		</form>
 		<br>
 		<br>
 	</div>

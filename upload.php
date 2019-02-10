@@ -70,7 +70,7 @@
 					
 			<div class="form-group">
 				<label for="AdresaForm">Adresa URL:</label>
-				<input type="text" autocomplete="off" class="form-control" id="AdresaForm" placeholder="Zadejte adresu" name='adresa'>
+				<input type="url" autocomplete="off" class="form-control" id="AdresaForm" placeholder="Zadejte adresu" name='adresa'>
 			</div>
 			
 			

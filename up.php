@@ -48,8 +48,11 @@ if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSIO
 	}
 	
 	//Name confirm
-		if(empty(trim($_POST['name']))){    
+		if(empty(trim($_POST['name']))){ 
+			$uploadOk ==0;
 		}else{
+		$name = trim($_POST['name']);
+			
         $filename = basename($_FILES['fileToUpload']['name']);
         $nazev    = pathinfo($filename, PATHINFO_FILENAME);
         $nazev    = iconv("utf-8", "us-ascii//TRANSLIT", $nazev);  //odstraníme pro jistotu diakritiku
@@ -69,16 +72,10 @@ if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSIO
         
         $filename  = $slozka . $nazev. $increment . '.' . $pripona;
 		}
-	
-	//Name confirm
-		if(empty(trim($_POST['name']))){    
-		}else{
-        $name = trim($_POST['name']);
-		}
 		
 	//FinallyAuthenticate
 	if ($uploadOk ==0){
-		echo " Pardon, Váš soubor nesplňuje všechny podmínky.";
+		echo "Pardon, Váš soubor nesplňuje všechny podmínky. ";
 	} else {
 	if( move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $filename) ) {
 		//NASTAVENÍ MySQL
@@ -114,7 +111,7 @@ if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSIO
                 // Redirect to download page
                 header("location: download.php");
             } else{
-                echo "Nečekaná chyba.";
+                echo "Neočekávaná chyba.";
             }
         }
          

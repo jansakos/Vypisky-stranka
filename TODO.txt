@@ -19,6 +19,7 @@ Automatické tázání na PWA
 Zprovoznit tlačítko o odsouhlasení
 Přidat zobrazení nápovědy do nastavení
 Opraveno vystředění u dodatků
+Opravy v rámci bezpečnosti (prázdné soubory, nevyplněná pole, ...)
 -----------------
 
 DO TÉTO VERZE - tato
@@ -26,20 +27,19 @@ Nastavitelný design (měnné v databázi)
 Udělat stránku rychlého přehledu
 	Diář
 	Oznámení
-Mazání zpráv v Chatroom
-Obrázky v Chatroom přes soubory
+Chatroom skrze databázi
 -----------------
-
 
 BLÍZKÁ BUDOUCNOST - příští
 Notifikační zvonek
 Redesign download sekce (kromě tabulky)
-mazaní vlastních Výpisků
+Mazaní vlastních Výpisků
 Optimalizace https
 Lepší Autoscroll Chatroom
 CleanUp kódu (odřádkování)
 Notifikace na Chatroom + nahrávání Výpisků
 Vypínání push notifikací
+Standardizace chybových hlášek
 -----------------
 
 SLOŽITÉ - někdy

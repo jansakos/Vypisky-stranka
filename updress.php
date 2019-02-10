@@ -29,25 +29,37 @@ if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSIO
   
 	<body>
 <?php
-		//NASTAVENÍ MySQL
-		require_once 'config.php';
-		$author = $name = $subject = $address = "";
+	$uploadOk = 1;
+	$author = $name = $subject = $address = "";
 		
-		//Výběr SQL
+		//Oznámení postu
+		require_once 'config.php';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
 			
 		//Subject confirm
-		if(empty(trim($_POST['subject']))){ 		
+		if(empty(trim($_POST['subject']))){ 
+			$uploadOk = 0;
 		}else{
         $subject = trim($_POST['subject']);
 		}
 		
 		//Name confirm
-		if(empty(trim($_POST['nameht']))){    
+		if(empty(trim($_POST['nameht']))){  
+			$uploadOk = 0;
 		}else{
         $name = trim($_POST['nameht']);
 		}
 	
+		//Address confirm
+		if(empty(trim($_POST['adresa']))){  
+			$uploadOk = 0;
+		}else{
+        $address = trim($_POST['adresa']);
+		}
+	
+	if ($uploadOk ==0){
+		echo "Pardon, Vaše adresa nesplňuje všechny podmínky. ";
+	} else {
 		//MySQL
 			$sql = "INSERT INTO files (subject, name, address, author) VALUES (?, ?, ?, ?)";
 			
@@ -59,23 +71,25 @@ if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSIO
             $param_name = $name;
             $param_subject = $subject;
 			$param_author = ($_SESSION['username']);
-			$param_address = ($_POST['adresa']);
+			$param_address = $address;
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to download page
                 header("location: download.php");
             } else{
-                echo "Nečekaná chyba.";
+                echo "Neočekávaná chyba.";
             }
         }
          
         // Close statement
         mysqli_stmt_close($stmt);
-    }
+   
     
     // Close connection
     mysqli_close($link);
+	}
+	}
 ?>
 </body>
 </html>
