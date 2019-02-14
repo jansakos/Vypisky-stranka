@@ -8,9 +8,7 @@ Při více souborech přidat číslo
 Podpora custom designů (obsáhlá) - php include na všechen text
 PWA
 ServiceWorkers
-Chatroom - dělení data
-Chatroom - obrázky, hypertexťáky
-Odstranění předešlých nápisů
+Odstranění sugescí
 Redesign nastavení účtu
 Upravit informace na stránce
 Odstraněn bookmark
@@ -20,14 +18,18 @@ Zprovoznit tlačítko o odsouhlasení
 Přidat zobrazení nápovědy do nastavení
 Opraveno vystředění u dodatků
 Opravy v rámci bezpečnosti (prázdné soubory, nevyplněná pole, ...)
+Aktualizace bootstrap.css
+Ošetřit max. délku názvu výpisku
+Chatroom skrze databázi
 -----------------
 
 DO TÉTO VERZE - tato
 Nastavitelný design (měnné v databázi)
 Udělat stránku rychlého přehledu
-	Diář
+	Diář 						(WIP VojtatSoft)
 	Oznámení
-Chatroom skrze databázi
+Chatroom - dělení data
+Chatroom - obrázky, hypertexťáky
 -----------------
 
 BLÍZKÁ BUDOUCNOST - příští
@@ -40,10 +42,13 @@ CleanUp kódu (odřádkování)
 Notifikace na Chatroom + nahrávání Výpisků
 Vypínání push notifikací
 Standardizace chybových hlášek
+Párování Výpisků s akcí v diáři
+Propojení archivu s hlavní stránkou
+Po uplynutí akce v diáři => automatické přesunutí do archivu
+Hashování hesel
 -----------------
 
 SLOŽITÉ - někdy
-Implementace suplování
 Přidat design
 CleanUp kódu (debordelizace)
 Crossing over it
@@ -53,6 +58,7 @@ NAVRHOVANÉ - spíše ne
 -----------------
 
 ZRUŠENÉ
+Implementace suplování [E-třídnice]
 Aplikace [zavedení PWA]
 bugtracker [není třeba]
 Bugování obrázků [pouze obrázky z localhostu, norm. nedostupné]

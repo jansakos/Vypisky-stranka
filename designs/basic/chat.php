@@ -61,17 +61,11 @@
 <br><br><br>	
 </div>
 
-<div id="r">
-		<div class="container">
-			<div class="row centered"><centered>
-				<div class="col-lg-8 col-lg-offset-2">
+<hr>
 					<?php
 						include("../../parts/crfoot.php");
 					?>
-				</div></centered>
-			</div>
-		</div>
-	</div>
+
 	
 	<?php
      include("footer.php");

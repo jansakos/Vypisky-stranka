@@ -33,14 +33,14 @@
 			
 			<div class="form-group">
 				<div class="col-lg-4 col-lg-offset-4">
-					<input type='file' class="btn btn-default" name='fileToUpload' id='fileToUpload'>
+					<input type='file' required class="btn btn-default" name='fileToUpload' id='fileToUpload'>
 				</div>
 			</div>
 			
             <div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="NazevForm">Název:</label>
-					<input type="text" autocomplete="off" class="form-control" placeholder="Zadejte název" name="name" id="NazevForm">
+					<input type="text" autocomplete="off" maxlength="30" class="form-control" required placeholder="Zadejte název (max. 30 znaků)" name="name" id="NazevForm">
 					<span class="help-block"></span>
 				</div>
 				
@@ -70,14 +70,14 @@
 					
 			<div class="form-group">
 				<label for="AdresaForm">Adresa URL:</label>
-				<input type="url" autocomplete="off" class="form-control" id="AdresaForm" placeholder="Zadejte adresu" name='adresa'>
+				<input type="url" autocomplete="off" required class="form-control" id="AdresaForm" placeholder="Zadejte adresu (včetně http/https://)" name='adresa'>
 			</div>
 			
 			
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="NazevHT">Název:</label>
-					<input type="text" autocomplete="off" class="form-control" placeholder="Zadejte název" name="nameht" id="NazevHT">
+					<input type="text" autocomplete="off" maxlength="30" required class="form-control" placeholder="Zadejte název (max. 30 znaků)" name="nameht" id="NazevHT">
 					<span class="help-block"></span>
 				</div>
 				

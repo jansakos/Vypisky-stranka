@@ -78,7 +78,6 @@
 			<input type="submit" class="btn btn-primary btn-lg btn-block" value="Rozumím, přejít na stránku.">
 		</form>
 		<br>
-		<br>
 	</div>
 	
 	<div id="r">

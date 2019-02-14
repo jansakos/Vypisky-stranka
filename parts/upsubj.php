@@ -1,4 +1,3 @@
-<select id="PredmetForm" class="form-control" name="subject">
 							<option selected value = "Čj">Český jazyk</option>
 							<option value = "Aj">Anglický jazyk</option>
 							<option value = "Nj">Německý jazyk</option>
@@ -16,4 +15,4 @@
 							<option value = "Vv">Výtvarná výchova</option>
 							<option value = "Tv">Tělesná výchova</option>
 							<option value = "X">Ostatní</option>
-					</select>
+					

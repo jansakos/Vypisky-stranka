@@ -1,7 +1,7 @@
 		<tr>
-			<td><b><i>Verze:</b></i></td>
-			<td><b><i>Datum:</b></i></td>
-			<td><b><i>Novinky:</b></i></td>
+			<td><b><i>Verze:</i></b></td>
+			<td><b><i>Datum:</i></b></td>
+			<td><b><i>Novinky:</i></b></td>
 		</tr>
 		<tr>
 			<td><p><b>#INITIAL</b></p></td>

@@ -41,9 +41,15 @@ if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSIO
 						$maxsize = 200000;
 					}
 
-	//MaxFileSize1MB
+	//MaxFileSize
 	if ($_FILES ["fileToUpload"]["size"] > $maxsize) {
 		echo "Pardon, velikost souboru nesmí přesáhnout ".$maxsize." bytů.";
+		$uploadOk = 0;
+	}
+	
+	//EmptyFile
+	if ($_FILES ["fileToUpload"]["size"] == "0") {
+		echo "Pardon, soubor nesmí být prázdný.";
 		$uploadOk = 0;
 	}
 	

@@ -57,7 +57,7 @@
 			if(($_SESSION['permission'])=="o"){
 				echo "<thead>
       <tr>
-		<th>PŘ</th>
+		<th>PŘ.</th>
         <th>NÁZEV</th>
 		<th>AUTOR</th>
         <th><i class='fa fa-download'></i></th>
@@ -78,7 +78,7 @@
 			else{
 				echo "<thead>
       <tr>
-        <th>PŘ</th>
+        <th>PŘ.</th>
         <th>NÁZEV</th>
 		<th>AUTOR</th>
         <th><i class='fa fa-download'></i></th>
@@ -104,7 +104,7 @@
 
 		<?php
 			if(($_SESSION['permission']) == "o" || ($_SESSION['permission']) == "w" || ($_SESSION['permission']) == "u"){
-		echo "<div class='centered'><a class='btn btn-primary btn-sm' href='upload.php'>Nahrát výpisky</a><br></div>";
+		echo "<div class='centered'><a class='btn btn-default' href='upload.php'>Nahrát výpisky</a><br></div>";
 			}
 ?>
 		<div class="centered">

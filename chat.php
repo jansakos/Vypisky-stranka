@@ -14,10 +14,9 @@
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
 	
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/jquery-3.3.1.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/chatscroll.js"></script>
-	<link rel="stylesheet" href="assets/css/style.css" />
+	<link rel="stylesheet" href="assets/css/chat.css" />
 
   </head>
 
@@ -27,45 +26,28 @@
      include("header.php");
 	?>
 	
-<br><br>
+<br><br><br>
+	
 <div id="chat">
 	<div id="wrapper">
-    <div id="menu">
-        <h4>Vítejte, <b> <?php echo $_SESSION['username']; ?>. </b></h4>
-        <div style="clear:both"></div>
-    </div>
+		<div id="menu">
+			<h4>Vítejte, <b> <?php echo $_SESSION['username']; ?>. </b></h4>
+		</div>
      
-  <div id="chatbox">
-	<?php
-		include("/parts/chbox.php");
-	?>
-  </div>
-
-    
-    <form name="message" method='POST'>
-	<div class="form-group">
-        <input name="usermsg" type="text" autocomplete="off" id="usermsg" size="63" class="form-control" >
-	</div>
-	<div class="form-group">
-	<div class="form-row">
-		<select name="select" class="form-control" id="select">
-			<option selected value="txt">Text</option>
-			<option value="href">Odkaz</option>
-			<option value="img">Obrázek</option>
-		</select>
-        <input name="submitmsg" type="submit" id="submitmsg" value="Poslat" class="btn btn-primary" >
+		<div id="chat_wrapper">
+			<div id="chatbox">
+			
+			</div>
+			
+			<form method="POST" id="messform">
+				<input type="text" name="message" autocomplete="off" id="usermsg" class="form-control"></input>
+			</form>
+			
 		</div>
 	</div>
-    </form>
-	</div>
-
-	<?php
-		include("/parts/crbox.php");
-	?>
-<br><br><br>	
 </div>
-
-<div id="r">
+		
+	<div id="r">
 		<div class="container">
 			<div class="row centered">
 				<div class="col-lg-8 col-lg-offset-2">
@@ -76,10 +58,55 @@
 			</div>
 		</div>
 	</div>
-	
-	<?php
-     include("footer.php");
-	?>
+		
+		<?php
+			include("footer.php");
+		?>
+		
+		<script>
+			
+			setInterval(function(){
+				LoadChat();
+			}, 1000);
+			
+			function LoadChat(){
+				$.post('messages.php?action=getMessages', function(response){
+					
+					var scrollpos = $('#chatbox').scrollTop();
+					var scrollpos = parseInt(scrollpos) + 320;
+					var scrollHeight = $('#chatbox').prop('scrollHeight');
+					
+					$('#chatbox').html(response);
+					
+					if( scrollpos < scrollHeight ){
+						
+					}else{
+					$('#chatbox').scrollTop( $('#chatbox').prop('scrollHeight') ); }
+				});
+			}
+		
+			$('.input').keyup(function(e){
+				if(e.which == 13){
+					$('form').submit();
+				}
+			});
+			
+			$('form').submit(function(){
+				
+				var message = $(document.getElementById('usermsg')).val();
+				$.post('messages.php?action=sendMessage&message='+message, function(response){
+					
+					if( response ==1 ){
+						LoadChat();
+						document.getElementById('messform').reset();
+					}
+					
+				});
+				return false;
+				
+			});
+		
+		</script>
 	
   </body>
 </html>

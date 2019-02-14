@@ -10,7 +10,7 @@ if(($_SESSION['permission']) == "o"){
 } ?>
 
 <?php
-$password_err = '';
+$passold_err = $passnew_err = $passcon_err = '';
 $user = $_SESSION['username'];
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -22,26 +22,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	
 	//check old password
 	include ('config.php');
-	$queryget = mysqli_query($link, "SELECT password FROM login WHERE username='$user'") or die("Něco se nepovedlo.");
+	$queryget = mysqli_query($link, "SELECT password FROM login WHERE username='$user'") or die("Neprobehlo uspesne pripojeni k databazi.");
 	$row = mysqli_fetch_assoc($queryget);
 	$oldpassworddb = $row['password'];
 	
 	if ($oldpassword != $oldpassworddb){
-		$password_err = "Napsané heslo se neshoduje se starým!";
-	}else{
-		
-		//check newpassword and confpassword
-		if ($newpassword != $confpassword){
-			$password_err = "Nové heslo a jeho kontrola se neshodují!";
+			$passold_err = "Napsané heslo se neshoduje se starým!";
 		}else{
+	
+		if ($newpassword == ""){
+			$passnew_err = "Nenapsali jste nové heslo!";
+		}else{
+	
+			//check newpassword and confpassword
+			if ($newpassword != $confpassword){
+				$passcon_err = "Nové heslo a jeho kontrola se neshodují!";
+			}else{
+				
+				if ($newpassword == $oldpassword){
+					$passnew_err = "Nové heslo a staré heslo se shodují!";
+				}else{
 			
-			//change password
-			$querychange = mysqli_query($link, "
-			UPDATE login SET password='$newpassword' WHERE username='$user'
-			");
-			session_destroy();
-			header("location: login.php");
-			exit;
+					//change password
+					$querychange = mysqli_query($link, "
+					UPDATE login SET password='$newpassword' WHERE username='$user'
+					");
+					session_destroy();
+					header("location: login.php");
+					exit;
+				}
+			}
 		}
 	}
 }

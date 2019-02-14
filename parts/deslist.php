@@ -1,3 +1,2 @@
-<option>Default</option>
-<option>Basic</option>
-<option>ONEpage</option>
+<option value="default">Default</option>
+<option value="basic">Basic</option>
