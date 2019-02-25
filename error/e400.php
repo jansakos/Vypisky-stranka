@@ -15,14 +15,14 @@
     <link rel="shortcut icon" href="img/favicon.png">
     <title>Error | Výpisky</title>
 	
-    <link href="../assets/css/bootstrap.css" rel="stylesheet">
-    <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../assets/css/main.css" rel="stylesheet">
-	<link href="../assets/css/err.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/main.css" rel="stylesheet">
+	<link href="/assets/css/err.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="../assets/js/addtohomescreen.js"></script>
+	<script src="/assets/js/addtohomescreen.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -35,7 +35,7 @@
 		<div class="notfound">
 			<h1>400 – Bad request!</h1>
 			<h2>Server nerozumí požadavku.</h2> Překontrolujte správnost adresy. Může se jednat o dočasný výpadek, zkuste stránku načíst znovu později. Pokud problém přetrvává, kontaktujte Administraci Výpisků.<br>
-			<a href="../index.php">Přejít na úvod</a>
+			<a href="/index.php">Přejít na úvod</a>
 	</div>
 	</div>
 
