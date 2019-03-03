@@ -1,11 +1,11 @@
 <?php
-	include("/parts/doperm.php");
+	include("parts/doperm.php");
 ?>
 <!DOCTYPE html>
 <html lang="cs">
   <head>
   <?php
-	include("/parts/head.php");
+	include("parts/head.php");
   ?>
   <title>Ke stažení | Výpisky</title>
 	
@@ -35,7 +35,7 @@
 			echo '<div class="dropdown">
 			<button class="btn btn-secondary dropdown-toggle" style="margin-left:20px" type="button" data-toggle="dropdown" >Seřadit dle
 				<span class="caret"></span></button>';
-			include("/parts/dorder.php");
+			include("parts/dorder.php");
 			echo '</div>';
 			}
 	?>
@@ -118,7 +118,7 @@
 			<div class="centered">
 				<div class="col-lg-8 col-md-offset-2">
 					<?php
-						include("/parts/dofoot.php");
+						include("parts/dofoot.php");
 					?>
 				</div>
 			</div>

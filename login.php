@@ -1,11 +1,11 @@
 <?php
-     include("/parts/loperm.php");
+     include("parts/loperm.php");
 ?>
 <!DOCTYPE html>
 <html lang="cs">
   <head>
     <?php
-     include("/parts/head.php");
+     include("parts/head.php");
 	?>
     <title>Jaroška | Výpisky</title>
 	
@@ -20,12 +20,12 @@
   <body>
 	<div class="container">
        <?php
-			include("/parts/lomain.php");
+			include("parts/lomain.php");
 		?>
 			<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Uživatelské jméno:</label>
 
-					<input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+					<input type="text" autofocus name="username" class="form-control" value="<?php echo $username; ?>">
 
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div> 

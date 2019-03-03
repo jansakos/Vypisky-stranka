@@ -1,12 +1,12 @@
 <?php
-	include("/parts/fperm.php");
+	include("parts/fperm.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="cs">
   <head>
 	<?php
-		include("/parts/head.php");
+		include("parts/head.php");
 	?>
     <title>Jaroška | Výpisky</title>
 	
@@ -25,7 +25,7 @@
 		<div class="centered">
 			<div class="col-lg-8  col-lg-offset-2">
 				<?php
-					include("/parts/iwelc.php");
+					include("parts/iwelc.php");
 				?>
 			</div>
 			<div class="col-lg-2"></div>
@@ -85,7 +85,7 @@
 			<div class="centered">
 				<div class="col-lg-8 col-lg-offset-2">
 					<?php
-						include("/parts/ifoot.php");
+						include("parts/ifoot.php");
 					?>
 				</div>
 			</div>

@@ -148,35 +148,42 @@
 			</td>
 		</tr>
 		<tr>
-			<td><p><b>0.8 (Huge update)</b></p></td>
-			<td><p>10.1.2019</p></td>
-			<td>
-				<ul>
-					<li>Plná podpora vlastních vzhledů.</li>
-					<li>Možnost měnit vzhled z nastavení</li>
-					<li>Možnost posílání odkazů a obrázků v Chatroom</li>
-					<li>Dělení zpráv v Chatroom dle data</li>
-					<li>Přidání service workers</li>
-					<li>Podpora PWA</li>
-					<li>Přidány Push notifikace (Chatroom + nahrání výpisku)</li>
-					<li>Přidány nové ikonky</li>
-					<li>Opraveno nahravání (odstranění diakritiky)</li>
-					<li>Podpora nahrání více souborů se stejným názvem</li>
-					<li>Možnost celkového vypnutí Push notifikací</li>
-					<li>Lehký redesign nastavení účtu</li>
-					<li>Odstraněna predikce z Chatroom a názvů výpisků</li>
-					<li>Separace nahrávání souborů/odkazů</li>
-					<li>Opraveno přidání do oblíbených</li>
-					<li>Nezobrazení řazení bez výpisků</li>
-				</ul>
-			</td>
-		</tr>
-		<tr>
 			<td><p><b>End.Of.WZ (Down update)</b></p></td>
 			<td><p>1.2.2019</p></td>
 			<td>
 				<ul>
 					<li>Stránka byla stažena ze serveru WZ</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><p><b>0.8 (Huge update)</b></p></td>
+			<td><p>8.3.2019</p></td>
+			<td>
+				<ul>
+					<li>Redesign úvodní sekce</li>
+					<li>Stránka nápovědy, automaticky při prvním přihlášení</li>
+					<li>Diář</li>
+					<li>Oznámení odesílaná správcem</li>
+					<li>Zvětšen velikostní limit výpisků</li>
+					<li>Převedení Chatroom na databázový systém</li>
+					<li>Posílání odkazů v Chatroom a jejich automatická detekce</li>
+					<li>Dělení zpráv v Chatroom dle data</li>
+					<li>Přidání service workers</li>
+					<li>Podpora PWA</li>
+					<li>Přidány nové ikonky</li>
+					<li>Opraveno nahravání (odstranění diakritiky)</li>
+					<li>Podpora nahrání více souborů se stejným názvem</li>
+					<li>Lehký redesign nastavení účtu</li>
+					<li>Odstraněna predikce z Chatroom a názvů výpisků</li>
+					<li>Separace nahrávání souborů/odkazů</li>
+					<li>Odstraněno přidání do oblíbených</li>
+					<li>Nezobrazení řazení bez výpisků</li>
+					<li>Opraveno vystředění dodatků</li>
+					<li>Velké interní bugfixy</li>
+					<li>Aktualizován bootstrap.css</li>
+					<li>Ošetření max. délky názvu výpisku</li>
+					<li>Automatické vytváření miniatury</li>
 				</ul>
 			</td>
 		</tr>

@@ -1,11 +1,11 @@
 <?php
-     include("/parts/setperm.php");
+     include("parts/setperm.php");
 ?>
 <!DOCTYPE html>
 <html lang="cs">
   <head>
 	<?php
-     include("/parts/head.php");
+     include("parts/head.php");
 	?>
     <title>Nastavení účtu | Výpisky</title>
 	
@@ -56,7 +56,7 @@
 		<label for="sel1">Design:</label>
 		<select class="form-control" name ="design" id="sel1">
 			<?php
-				include("/parts/deslist.php");
+				include("parts/deslist.php");
 			?>
 		</select>
 	</div>-->

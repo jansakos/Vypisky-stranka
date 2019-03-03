@@ -1,11 +1,11 @@
 <?php
-	include("/parts/upperm.php");
+	include("parts/upperm.php");
 ?>
 <!DOCTYPE html>
 <html lang="cs">
   <head>
     <?php
-		include("/parts/head.php");
+		include("parts/head.php");
 	?>
     <title>Jaroška | Výpisky</title>
 	
@@ -32,7 +32,7 @@
 		<form action='up.php' method='post' enctype='multipart/form-data'>
 			
 			<div class="form-group">
-				<div class="col-lg-4 col-lg-offset-4">
+				<div class="col-lg-6 col-lg-offset-4">
 					<input type='file' required class="btn btn-default" name='fileToUpload' id='fileToUpload'>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 					<label for="PredmetForm">Předmět:</label>
 					<select id="PredmetForm" class="form-control" name="subject">
 						<?php
-							include("/parts/upsubj.php");
+							include("parts/upsubj.php");
 						?>
 					</select>
 				</div>
@@ -85,11 +85,12 @@
 					<label for="PredmetHT">Předmět:</label>
 					<select id="PredmetHT" class="form-control" name="subject">
 						<?php
-							include("/parts/upsubj.php");
+							include("parts/upsubj.php");
 						?>
 					</select>
 				</div>
 				<div class="form-group col-md-1">
+					<label> </label>
 					<input type='submit' class="btn btn-primary" value='Nahrát odkaz' name='submit'>
 				</div>
 			</div>
@@ -105,7 +106,7 @@
 			<div class="centered">
 				<div class="col-lg-8 col-lg-offset-2">
 					<?php
-						include("/parts/upfoot.php");
+						include("parts/upfoot.php");
 					?>
 				</div>
 			</div>

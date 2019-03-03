@@ -1,5 +1,5 @@
 <?php
-	include("/parts/iperm.php");
+	include("parts/iperm.php");
 ?>
 
 <!DOCTYPE html>

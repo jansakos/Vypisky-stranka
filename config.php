@@ -3,7 +3,7 @@ $DB_SERVER='';
 $DB_USERNAME='';
 $DB_PASSWORD='';
 $DB_NAME='';
-$DB_CHARSET = '';
+$DB_CHARSET='utf8mb4';
 
 $link = mysqli_connect($DB_SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 
@@ -22,4 +22,7 @@ try {
 if($link == false) {
 	die("CHYBA: Připojení k databázi neproběhlo!".mysqli_connect_error());
 }
+
+//Nastavení složky pro upload obrázků
+$root = '/assets/files/obrazky/';
 ?>

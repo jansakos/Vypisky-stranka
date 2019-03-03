@@ -2370,9 +2370,10 @@ th {
   text-align: left;
 }
 .table {
-  width: 100%;
-  max-width: 100%;
+  width: 95%;
+  max-width: 95%;
   margin-bottom: 20px;
+  margin: auto;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -3018,10 +3019,11 @@ select[multiple].input-lg {
     display: inline-block;
     margin-bottom: 0;
     vertical-align: middle;
+	width: 90%;
   }
   .form-inline .form-control {
     display: inline-block;
-    width: auto;
+    width: 100%;
     vertical-align: middle;
   }
   .form-inline .form-control-static {
@@ -3670,6 +3672,10 @@ tbody.collapse.in {
 .dropdown-menu-right {
   right: 0;
   left: auto;
+}
+.dropdown-menu-center {
+  right: -102px;
+  left: -102px;
 }
 .dropdown-menu-left {
   right: auto;

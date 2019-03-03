@@ -12,7 +12,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="keywords" content="Jaroska, vypisky, vypisky Jarosky, Sakos, 4bg">
-    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="../ico/favicon.png">
     <title>Error | Výpisky</title>
 	
     <link href="../assets/css/bootstrap.css" rel="stylesheet">

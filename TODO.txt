@@ -21,23 +21,37 @@ Opravy v rámci bezpečnosti (prázdné soubory, nevyplněná pole, ...)
 Aktualizace bootstrap.css
 Ošetřit max. délku názvu výpisku
 Chatroom skrze databázi
------------------
-
-DO TÉTO VERZE - tato
-Nastavitelný design (měnné v databázi)
-Udělat stránku rychlého přehledu
-	Diář 						(WIP VojtatSoft)
-	Oznámení
 Chatroom - dělení data
-Chatroom - obrázky, hypertexťáky
+Mazání zpráv
+hypertexťáky (automaticky)
+Redesign offline
+Chatroom - obrázky do lokál. úložiště
+Výroba miniatury pro Chatroom
+Chatroom - mazání obrázků
+Mazání událostí v diáři
+Diář -design, mazání			(VojtatSoft)
+Oprava autoscrollu u Chatroom
 -----------------
 
-BLÍZKÁ BUDOUCNOST - příští
+DO TÉTO VERZE - tato (0.8)
+Udělat stránku rychlého přehledu
+	Oznámení (odesílané adminem)
+-----------------
+
+OPRAVNÁ VERZE (0.8.1)
+Mazaní vlastních Výpisků
+Předesignování Chatroom (odesílání)
+Footer nejvýše na spodku obrazovky
+Redesign upload (řádek)
+Truncate pro admina na tabulky
+Design othertype
+-----------------
+
+BLÍZKÁ BUDOUCNOST - příští (0.9)
+Nastavitelný design (měnné v databázi)
 Notifikační zvonek
 Redesign download sekce (kromě tabulky)
-Mazaní vlastních Výpisků
 Optimalizace https
-Lepší Autoscroll Chatroom
 CleanUp kódu (odřádkování)
 Notifikace na Chatroom + nahrávání Výpisků
 Vypínání push notifikací

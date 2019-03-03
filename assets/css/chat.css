@@ -2,15 +2,18 @@
     font:12px arial;
     color: #222;
     text-align:center;
+	margin:auto;
     padding:35px;
-	width: 100%;}
+	width: 100%;
+	max-width: 1200px;
+	}
   
 form, span {
     margin:0;
     padding:0; }
   
 input { font:12px arial; }
-  
+
 #wrapper, #loginform {
     margin:0 auto;
     padding-bottom:25px;
@@ -101,11 +104,12 @@ margin:0 0 2px 0;
     margin-left: 15px;
 }
 
-.single-message p{
+.single-message, .single-picture p{
 	font-size:14px;
 	margin-top:5px;
 }
-.single-message span{
+
+.single-message, .single-picture span{
 	float:right;
 	font-size:12px;
 }
@@ -117,15 +121,33 @@ margin:0 0 2px 0;
 	float:right;
 	background:#007bff;
 	color:#FFFFFF;
-	
 }
-.single-message{
-	max-width:90%;
+.left a{
+	color: #222 !important;
+}
+.right a{
+	color:#FFFFFF !important;
+}
+.single-message {
+	max-width:70%;
 	margin:5px 0px 5px 0px;
 	padding:5px 10px 5px 10px;
 	border:1px solid #b3b3b3;
 	border-radius:5px;
 }
+.single-picture{
+	max-width:70%;
+	margin:5px 0px 5px 0px;
+	padding:5px 10px 5px 10px;
+	border:1px solid #b3b3b3;
+	border-radius:5px;
+	height: 130px;
+}
 .clear{
 	clear:both;
+}
+@media all and (max-width: 768px) {
+	.single-message, .single-picture{
+		max-width:90%;
+	}
 }

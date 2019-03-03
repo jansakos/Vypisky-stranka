@@ -1,12 +1,12 @@
 <?php
-	include("/parts/crperm.php");
+	include("parts/crperm.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="cs">
   <head>
     <?php
-     include("/parts/head.php");
+     include("parts/head.php");
 	?>
     <title>Chatroom | Výpisky</title>
 	
@@ -28,31 +28,51 @@
 	
 <br><br><br>
 	
-<div id="chat">
-	<div id="wrapper">
-		<div id="menu">
-			<h4>Vítejte, <b> <?php echo $_SESSION['username']; ?>. </b></h4>
-		</div>
-     
-		<div id="chat_wrapper">
-			<div id="chatbox">
-			
+	<div id="chat">
+		<div id="wrapper">
+			<div id="menu">
+				<h4>Vítejte, <b> <?php echo $_SESSION['username']; ?>. </b></h4>
 			</div>
-			
-			<form method="POST" id="messform">
-				<input type="text" name="message" autocomplete="off" id="usermsg" class="form-control"></input>
-			</form>
-			
+		 
+			<div id="chat_wrapper">
+				<div id="chatbox">
+				
+				</div>
+				
+				<div class="form-inline">
+					<form method="POST" id="messform">
+						<div class="form-group">
+							<input type="text" autofocus required name="message" autocomplete="off" id="usermsg" class="form-control"></input>
+						</div>
+						<input type="submit" value=">>>" class="btn btn-primary mb-2"></input>
+					</form>
+				
+					
+				
+					<div id="drop" class="btn-group dropup">
+						<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Obrázek
+							<span class="caret"></span>
+						</button>
+						<ul id="imgmenu" class="dropdown-menu dropdown-menu-center">
+							<div class="centered">
+								<li>Je povoleno nahrávat obrázky do velikosti<br> 5 MB typu jpg, png a gif.<br><br></li>
+								<li><input type="file" id="file" name="obrazky" required data-keepOpenOnClick class="btn btn-default"><br></li>
+								<li><button id='process-file-button' class="btn btn-primary mb-2">Nahrát</button></li>
+							</div>
+						</ul>						
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
 		
 	<div id="r">
 		<div class="container">
 			<div class="row centered">
 				<div class="col-lg-8 col-lg-offset-2">
 					<?php
-						include("/parts/crfoot.php");
+						include("parts/crfoot.php");
 					?>
 				</div>
 			</div>
@@ -64,49 +84,68 @@
 		?>
 		
 		<script>
-			
+			var res = "";
+			LoadChat();
 			setInterval(function(){
 				LoadChat();
 			}, 1000);
-			
 			function LoadChat(){
 				$.post('messages.php?action=getMessages', function(response){
-					
+				 if(res!=(response)){
 					var scrollpos = $('#chatbox').scrollTop();
 					var scrollpos = parseInt(scrollpos) + 320;
 					var scrollHeight = $('#chatbox').prop('scrollHeight');
-					
 					$('#chatbox').html(response);
-					
-					if( scrollpos < scrollHeight ){
-						
+					res = (response);
+					if( scrollpos < scrollHeight ){	
 					}else{
 					$('#chatbox').scrollTop( $('#chatbox').prop('scrollHeight') ); }
+					}
 				});
+				
 			}
-		
 			$('.input').keyup(function(e){
 				if(e.which == 13){
 					$('form').submit();
 				}
 			});
-			
 			$('form').submit(function(){
-				
-				var message = $(document.getElementById('usermsg')).val();
-				$.post('messages.php?action=sendMessage&message='+message, function(response){
-					
+					var message = $(document.getElementById('usermsg')).val();
+					$.post('messages.php?action=sendMessage&message='+message, function(response){
 					if( response ==1 ){
 						LoadChat();
 						document.getElementById('messform').reset();
 					}
-					
 				});
 				return false;
-				
 			});
-		
+			$('#process-file-button').on('click', function (f) {
+				let files = new FormData(), // you can consider this as 'data bag'
+					url = 'messages.php';
+				files.append('fileName', $('#file')[0].files[0]); // append selected file to the bag named 'file'
+				$.ajax({
+					type: 'post',
+					url: url,
+					processData: false,
+					contentType: false,
+					data: files,
+					success: function (response) {
+						console.log(response);
+					},
+					error: function (err) {
+						console.log(err);
+					}
+				});
+				document.getElementById("file").value = "";
+			});
+					
 		</script>
-	
+		<script>
+			$(function() {
+				$("ul.dropdown-menu").on("click", "[data-keepOpenOnClick]", function(g) {
+					g.stopPropagation();
+				});
+			});
+		</script>
   </body>
 </html>

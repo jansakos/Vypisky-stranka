@@ -1,11 +1,11 @@
 <?php
-	include("/parts/aperm.php");
+	include("parts/aperm.php");
 ?>
 <!DOCTYPE html>
 <html lang="cs">
   <head>
 	<?php
-		include("/parts/head.php");
+		include("parts/head.php");
 	?>
     <title>Nastavení stránky | Výpisky</title>
 	
@@ -25,6 +25,33 @@
   
   <br><br>
 
+	<div class="container wb">
+		<div class="row_centered">
+			<h2>Nové oznámení</h2>
+			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+					<label>Oznámení</label>
+					<input type="text" name="text" class="form-control">   
+					<label>Určeno pro?</label>
+					<input type="text" name="forwhom" class="form-control">
+					<label>Expirace</label>
+					<input type="date" name="exp" class="form-control">
+					<label>Typ</label>
+					<select name="type" class="form-control">
+						<option value="1">Oznámení</option>
+						<option value="2">Upozornění</option>
+						<option value="3">Varování</option>
+						<option value="4">Výpadek</option>
+					</select> 
+					<span class="help-block"><?php ?></span>
+				
+				<div class="form-group">
+					<input type="submit" class="btn btn-primary" value="Přidat">
+					<input type="reset" class="btn btn-default" value="Reset">
+				</div>
+			</form>
+		</div>
+	</div>
+  
 	<div class="container wb">
 		<div class="row_centered">
 			<h2>Nový účet</h2>
@@ -52,21 +79,20 @@
 		</div>
 	</div>
 	
+	<div class="container">
+		<a href="first.php" class="btn btn-primary btn-lg btn-block">Zobrazit nápovědu</a>
+	</div>
+	
 	<div class="container-w">
 		<h2>Úpravy účtů</h2>
 		<div class="table-responsive">
 			<table class='table table-hover'>
 				<?php
-					include("/parts/atable.php");
+					include("parts/atable.php");
 				?>
 			</table>
 		</div>
 	</div>
-	
-	<!--<div class="container">
-		<h2>Vyčistit Chatroom</h2>
-		<a href="clch.php">Vyčistit</a>
-	</div>-->
 	
 	<?php
      include("footer.php");

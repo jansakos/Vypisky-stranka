@@ -35,10 +35,10 @@ if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSIO
 						$maxsize = 10000000;
 					}
 					if(($_SESSION['permission'])=="w") {
-						$maxsize = 1000000;
+						$maxsize = 2000000;
 					}
 					if(($_SESSION['permission'])=="u") {
-						$maxsize = 200000;
+						$maxsize = 250000;
 					}
 
 	//MaxFileSize

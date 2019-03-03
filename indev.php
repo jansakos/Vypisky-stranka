@@ -12,7 +12,7 @@
 			<div class="row centered">
 				<div class="col-lg-8 col-lg-offset-2">
 					<?php
-						include("/parts/wip.php");
+						include("parts/wip.php");
 					?>
 				</div>
 			</div>
