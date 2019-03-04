@@ -22,9 +22,7 @@
 	<?php
 	include("header.php")
 	?>
-	
-	<br><br><br><br>
-	
+		
 	<div class="container w">
 	<div class="row centered">
 	<div class="wrapper">
@@ -105,9 +103,20 @@
 		<div class="container">
 			<div class="centered">
 				<div class="col-lg-8 col-lg-offset-2">
-					<?php
-						include("parts/upfoot.php");
+					<h4>VAROVÁNÍ</h4>
+					<p>Vzhedem k současným implementacím jazyka a dalším bezpečnostním opatřením nesmí velikost souboru přesáhnout 
+					<?php 
+					if(($_SESSION['permission'])=="o") {
+						echo "10 MB.";
+					}
+					if(($_SESSION['permission'])=="w") {
+						echo "2 MB.";
+					}
+					if(($_SESSION['permission'])=="u") {
+						echo "250 kB.";
+					}
 					?>
+					Po nahrání bude názvu souboru odstraněna diakritika. Pokud máte problém s nahráním souboru, můžete požádat provozovatele o nahrání.</p>
 				</div>
 			</div>
 		</div>

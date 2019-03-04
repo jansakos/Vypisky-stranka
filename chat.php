@@ -1,7 +1,14 @@
 <?php
-	include("parts/crperm.php");
+session_start();
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+	header("location: login.php");
+	exit;
+}
+if(($_SESSION['permission']) == "n"){
+	header("location: index.php");
+	exit;
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="cs">
   <head>
@@ -20,13 +27,11 @@
 
   </head>
 
-  <body>
+  <body class="s-body">
 
     <?php
      include("header.php");
 	?>
-	
-<br><br><br>
 	
 	<div id="chat">
 		<div id="wrapper">
@@ -71,9 +76,8 @@
 		<div class="container">
 			<div class="row centered">
 				<div class="col-lg-8 col-lg-offset-2">
-					<?php
-						include("parts/crfoot.php");
-					?>
+					<h4>PRAVIDLA</h4>
+					<p>Na Výpiscích (jejichž součástí je i Chatroom) je zakázáno zveřejňovat obsah posměšný, urážlivý, pornografický, propagující drogy či obsah, který není v souladu s platnými zákony ČR. Taktéž je zakázáno prostřednictvím obrázků/odkazů sledovat aktivitu uživatelů, využívat je jako zdroj příjmů a taktéž je zakázáno spamovat. Při porušení tohoto pravidla může být uživatel bez varování vyhoštěn z Chatroom, čímž si znemožní i možnost nahrávat výpisky. Při opakovaném porušování pravidel může být uživateli znemožněn přístup na Výpisky.</p>
 				</div>
 			</div>
 		</div>

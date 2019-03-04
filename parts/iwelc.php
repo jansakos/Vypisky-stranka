@@ -1,2 +1,0 @@
-<h3><b>VÝPISKY - NÁPOVĚDA</b></h3>
-	<p>Vítáme Vás na této stránce, na které lze nalést nástroje usnadňující komunikaci a integraci sdílení výpisků. Stránka by měla být optimalizována pro většinu internetových prohlížečů, počítačových i mobilních. Pokud byste nalezli nějaké chyby, napište autorovi a oznamte mu je. Stránka byla designována pro co nejjednodušší ovládání, pokud byste si nevěděli rady, kde co naleznete, tak níže máte přehled sekcí a jejich stručný obsah:</p>

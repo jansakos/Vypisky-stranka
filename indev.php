@@ -1,6 +1,5 @@
 <div class="container-w">
 	<div class="centered">
-	<br><br><br><br><br>
 		<h1>PRACUJEME NA TOM</h1><br>
 		<h2>Až to doděláme, tak Vám dáme vědět.</h2><br>
 	</div>
@@ -11,9 +10,8 @@
 		<div class="container">
 			<div class="row centered">
 				<div class="col-lg-8 col-lg-offset-2">
-					<?php
-						include("parts/wip.php");
-					?>
+					<h4>VE VÝVOJI!</h4>
+					<p>Všechny takto označené sekce (a prvky) jsou ve vývoji, to znamená, že jsou prozatím nefunkční. Je naprostá ztráta času tyto sekce navštěvovat, jelikož nefungují.</p>
 				</div>
 			</div>
 		</div>

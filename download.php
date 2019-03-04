@@ -1,5 +1,24 @@
 <?php
-	include("parts/doperm.php");
+include ('config.php');
+session_start();
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+	header("location: login.php");
+	exit;
+}		
+
+$orderedBy = array('subject', 'name', 'author', 'id');
+	$order = 'subject';
+	if (isset($_GET['orderedBy']) && in_array($_GET['orderedBy'], $orderedBy)) {
+		$order = $_GET['orderedBy'];
+	}
+	
+$sql = 'SELECT * FROM files ORDER BY '.$order;
+		
+$query = mysqli_query($link, $sql);
+
+if (!$query) {
+	die ('SQL chyba: ' . mysqli_error($link));
+}
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -22,24 +41,25 @@
     <?php
      include("header.php");
 	?>
-	
-	<div class="container wb">
-		<div class="centered">
-			<br><br>
+			<div class="centered">
 				<h3>VÝPISKY KE STAŽENÍ</h3><br>
 		</div>
-	</div>
   
 	<?php
 		if (mysqli_num_rows($query)!=0){
 			echo '<div class="dropdown">
 			<button class="btn btn-secondary dropdown-toggle" style="margin-left:20px" type="button" data-toggle="dropdown" >Seřadit dle
-				<span class="caret"></span></button>';
-			include("parts/dorder.php");
-			echo '</div>';
+				<span class="caret"></span></button>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" href="?orderedBy=subject">Předmětu</a></li>
+				<li><a class="dropdown-item" href="?orderedBy=name">Názvu</a></li>
+				<li><a class="dropdown-item" href="?orderedBy=id">Stáří</a></li>
+				<li><a class="dropdown-item" href="?orderedBy=author">Autora</a></li>
+			  </ul>
+			</div>';
 			}
 	?>
-  
+  <br>
 	<div class="container-w">
 	
 	<div class="table-responsive">
@@ -117,9 +137,8 @@
 		<div class="container">
 			<div class="centered">
 				<div class="col-lg-8 col-md-offset-2">
-					<?php
-						include("parts/dofoot.php");
-					?>
+					<h4>POUZE AKTIVNÍ</h4>
+					<p>Na této stránce se nachází pouze aktuální výpisky. Pokud nemůžete Vámi hledané výpisky najít zde, jděte na <a href="http://archiv-vypisky.chytrak.cz">Archiv Výpisků Jarošky</a>. Zde se nachází všechny starší výpisky. Pokud zde Váš soubor chybí, dejte nám vědět a my se pokusíme jej zde nahrát.</p>
 				</div>
 			</div>
 		</div>

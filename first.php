@@ -1,5 +1,23 @@
 <?php
-	include("parts/fperm.php");
+session_start();
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+	header("location: login.php");
+	exit;
+}
+
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		//NASTAVENÍ MySQL
+		require_once 'config.php';
+		$user = $_SESSION['username'];
+	
+		//MySQL
+			$querychange = mysqli_query($link, "UPDATE login SET first='0' WHERE username='$user'");
+    
+    // Close connection
+    mysqli_close($link);
+	$_SESSION['first'] = "0";
+	header("location: index.php");
+	}
 ?>
 
 <!DOCTYPE html>
@@ -19,14 +37,13 @@
 	<script src="assets/js/notif.js"></script>
   </head>
 
-  <body>
+  <body class="n-body">
 	
 	<div class="container wb">
 		<div class="centered">
 			<div class="col-lg-8  col-lg-offset-2">
-				<?php
-					include("parts/iwelc.php");
-				?>
+				<h3><b>VÝPISKY - NÁPOVĚDA</b></h3>
+				<p>Vítáme Vás na této stránce, na které lze nalést nástroje usnadňující komunikaci a integraci sdílení výpisků. Stránka by měla být optimalizována pro většinu internetových prohlížečů, počítačových i mobilních. Pokud byste nalezli nějaké chyby, napište autorovi a oznamte mu je. Stránka byla designována pro co nejjednodušší ovládání, pokud byste si nevěděli rady, kde co naleznete, tak níže máte přehled sekcí a jejich stručný obsah:</p>
 			</div>
 			<div class="col-lg-2"></div>
 		</div>
@@ -84,9 +101,11 @@
 		<div class="container">
 			<div class="centered">
 				<div class="col-lg-8 col-lg-offset-2">
-					<?php
-						include("parts/ifoot.php");
-					?>
+					<h4>DODATEK</h4>
+					<p>Doporučujeme si tyto dodatky vždy přečíst, jelikož mohou obsahovat užitečné informace. Například: "V pravém horním rohu naleznete ikonku pro odhlášení.". Pokud byste chtěli tuto stránku zobrazit znovu, přejděte do nastavení, zde naleznete možnost "Zobrazit nápovědu".</p>
+					<hr>
+					<h4>APLIKACE</h4>
+					<p>Je výhodné si do mobilu přidat PWA aplikaci, jelikož Vám urychluje prohlížení Výpisků a přináší podporu push notifikací. Podporovány jsou prohlížeče Firefox, Chrome, Edge a Safari pro macOS.</p>
 				</div>
 			</div>
 		</div>

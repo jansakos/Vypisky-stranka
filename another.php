@@ -1,7 +1,15 @@
 <?php
-	include("parts/iperm.php");
+session_start();
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+	header("location: login.php");
+	exit;
+}
+if (isset($_SESSION['first'])){
+	if ($_SESSION['first'] == '1') {
+	header("location: first.php");
+	}
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="cs">
   <head>
