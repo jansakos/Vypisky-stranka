@@ -2,7 +2,7 @@
 Oficiální vyvíjená verze Výpisků.
 Jedná se o projekt, který se snaží usnadnit komunikaci mezi studenty. Každý student dostává své uživatelské jméno a heslo, následně
 mu může být uděleno oprávnění sdílet své soubory/webové adresy se svými kolegy. Ostatní mohou tyto soubory/odkazy volně navštěvovat.
-Součástí tohoto projektu je i velmi jednoduchá chatroom.
+Součástí tohoto projektu je i jednoduchá chatroom s podporou odkazů a obrázků. Dále se ve Výpiscích nachází i diář pro plánování nadcházejících zkoušek, prací, atd.
 
 # Požadavky
 - Server s podporou PHP 5 nebo PHP 7
