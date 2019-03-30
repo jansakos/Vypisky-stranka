@@ -10,14 +10,14 @@ $username_err = $password_err = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     if(empty(trim($_POST["username"]))){
-        $username_err = 'Zadejte, prosím, svoje uživatelské jméno.';
+        $username_err = 'Zadejte svoje uživatelské jméno.';
     } else{
         $username = trim($_POST["username"]);
     }
     
     // Check if password is empty
     if(empty(trim($_POST['password']))){
-        $password_err = 'Zadejte, prosím, svoje heslo.';
+        $password_err = 'Zadejte svoje heslo.';
     } else{
         $password = trim($_POST['password']);
     }
@@ -34,6 +34,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Set parameters
             $param_username = $username;
             
+			//bcrypt
+			//$hash = loadHashByUsername($username);
+			
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Store result
@@ -44,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // Bind result variables
                     mysqli_stmt_bind_result($stmt, $username, $hashed_password, $permission, $first);
                     if(mysqli_stmt_fetch($stmt)){
-                        if($password==$hashed_password){
+                        if(password_verify($password, $hashed_password)){
 							//Check if user is not paused
 								if($permission!="p"){
 								/* Password is correct, so start a new session and
@@ -83,7 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <?php
      include("parts/head.php");
 	?>
-    <title>Jaroška | Výpisky</title>
+    <title>Přihlášení | Výpisky</title>
 	
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
@@ -94,30 +97,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   </head>
 
   <body class="n-body">
-	<div class="container">
-       <h2>Přihlášení</h2>
-       <p>Přihlašte se, prosím, abyste mohli pokračovat na stránku Výpisků.</p>
-       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-			<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Uživatelské jméno:</label>
+	<div class="content-log">
+		<div class="container">
+		   <h2>Přihlášení</h2>
+		   <p>Přihlašte se, prosím, abyste mohli pokračovat na stránku Výpisků.</p>
+		   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+				<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+					<label>Uživatelské jméno:</label>
 
-					<input type="text" autofocus name="username" class="form-control" value="<?php echo $username; ?>">
+						<input type="text" autofocus name="username" class="form-control" value="<?php echo $username; ?>">
 
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div> 
-			
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Heslo:</label>
-			
-					<input type="password" name="password" class="form-control">
+					<span class="help-block"><?php echo $username_err; ?></span>
+				</div> 
+				
+				<div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+					<label>Heslo:</label>
+				
+						<input type="password" name="password" class="form-control">
 
-                <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
-			
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Přihlásit se">
-            </div>
-		</form>
+					<span class="help-block"><?php echo $password_err; ?></span>
+				</div>
+				
+				<div class="form-group">
+					<input type="submit" class="btn btn-primary" value="Přihlásit se">
+				</div>
+			</form>
+		</div>
 	</div>
 	<?php
      include("footer.php");

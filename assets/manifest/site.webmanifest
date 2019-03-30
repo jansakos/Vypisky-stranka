@@ -2,7 +2,7 @@
     "short_name": "Vypisky",
 	"name": "Vypisky Jarosky PWA",
     "start_url": "https://jaroska.my.to/",
-    "scope" : "./",
+    "scope" : "/",
     "icons": [
         {
             "src": "../ico/android-chrome-192x192.png",

@@ -4,7 +4,7 @@
 				Administrace Výpisků, 2018-<?php echo date("Y"); ?><br>
 				Používáme <a href="https://getbootstrap.com/">bootstrap.css</a> a <a href="https://fontawesome.com/">font-awesome.css</a><br>
 				a <a href="https://jquery.com/">jQuery</a> pro další správu<br>
-				<a href="changelog.php" title="Changelog">Verze 0.8</a><br>
+				<a href="changelog.php" title="Changelog">Verze 0.8.1</a><br>
 
 				<script src="assets/js/upup.min.js"></script>
 				<script>

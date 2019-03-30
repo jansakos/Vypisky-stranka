@@ -168,7 +168,7 @@ if(isset($_REQUEST['action'])){
 				//DETEKCE URL
 				$reg_exUrl = "/(http|https|ftp|ftps|sftp|gopher|mailto|telnet)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
 				if(preg_match($reg_exUrl, $text, $url)) {
-					$text = preg_replace($reg_exUrl, "<u><a href=".$url[0].">".$url[0]."</a></u> ", $text);
+					$text = preg_replace($reg_exUrl, "<u><a href=".$url[0]." title='Přejít'>".$url[0]."</a></u> ", $text);
 				}
 				
 			$query = "INSERT INTO chat (user, message) VALUES (?,?)";

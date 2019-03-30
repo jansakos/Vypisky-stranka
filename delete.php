@@ -4,7 +4,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
 	header("location: login.php");
 	exit;
 }
-if(($_SESSION['permission'])!="o"){
+if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w"){
 	header("location: download.php");
 	exit;
 }
@@ -13,16 +13,18 @@ if(($_SESSION['permission'])!="o"){
 <?php
 include ('config.php');
 
-$address = ($_GET['address']);
-$sql = 'DELETE FROM files
-		WHERE address="'.$address.'"';
-if ($link->query($sql) === TRUE) {
-    echo "Úspěšně smazáno";
-} else {
-    echo "Nastala chyba při mazání: " . $link->error;
-}
+$id = ($_GET['id']);
 
-$link->close();
+//DODĚLAT OVĚŘENÍ UŽIVATELE
+		$sql = 'DELETE FROM files
+				WHERE id="'.$id.'"';
+		if ($link->query($sql) === TRUE) {
+			echo "Úspěšně smazáno";
+		} else {
+			echo "Nastala chyba při mazání: " . $link->error;
+		}
+
+		$link->close();
 ?>
 
 <!DOCTYPE html>

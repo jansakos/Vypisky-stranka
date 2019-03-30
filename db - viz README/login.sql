@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS `login`;
 CREATE TABLE IF NOT EXISTS `login` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `username` varchar(6) NOT NULL,
-  `password` varchar(50) CHARACTER SET latin2 COLLATE latin2_czech_cs NOT NULL,
+  `password` varchar(120) CHARACTER SET latin2 COLLATE latin2_czech_cs NOT NULL,
   `permission` char(1) NOT NULL,
   `first` tinyint(1) NOT NULL DEFAULT '1',
   `design` varchar(15) NOT NULL DEFAULT 'default',

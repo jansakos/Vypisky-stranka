@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$row = mysqli_fetch_assoc($queryget);
 	$oldpassworddb = $row['password'];
 	
-	if ($oldpassword != $oldpassworddb){
+	if (!password_verify($oldpassword, $oldpassworddb)){
 			$passold_err = "Napsané heslo se neshoduje se starým!";
 		}else{
 	
@@ -39,12 +39,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			}else{
 				
 				if ($newpassword == $oldpassword){
-					$passnew_err = "Nové heslo a staré heslo se shodují!";
+					$passnew_err = "Nové heslo a staré heslo jsou stejné!";
 				}else{
 			
+					//bcrypt
+					$hashed_password = password_hash($newpassword, PASSWORD_BCRYPT);
+					
 					//change password
 					$querychange = mysqli_query($link, "
-					UPDATE login SET password='$newpassword' WHERE username='$user'
+					UPDATE login SET password='$hashed_password' WHERE username='$user'
 					");
 					session_destroy();
 					header("location: login.php");
@@ -71,53 +74,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <script src="assets/js/bootstrap.min.js"></script>
   </head>
 
-  <body>
-  
-	<?php
-		include("header.php")
-	?>
-   	
-	<form method="post" action="set.php" autocomplete="off">
-		<div class="container">   
-			<div class="form-group <?php echo (!empty($passold_err)) ? 'has-error' : ''; ?>">
-                <label>Staré heslo:</label>
-					<input type="text" name="oldpassword" class="form-control">
-                <span class="help-block"><?php echo $passold_err; ?></span>
-			</div>
-		
-			<div class="form-group <?php echo (!empty($passnew_err)) ? 'has-error' : ''; ?>">
-                <label>Nové heslo:</label>
-					<input type="password" name="newpassword" class="form-control">
-                <span class="help-block"><?php echo $passnew_err; ?></span>
-			</div>
-		
-			<div class="form-group <?php echo (!empty($passcon_err)) ? 'has-error' : ''; ?>">
-                <label>Potvrzení nového hesla:</label>
-					<input type="password" name="confpassword" class="form-control">
-                <span class="help-block"><?php echo $passcon_err; ?></span>
-			</div>
+  <body class="x-body">
+	
+		<?php
+			include("header.php")
+		?>
+		<div class="content">
+		<form method="post" action="set.php" autocomplete="off">
+			<div class="container">   
+				<div class="form-group <?php echo (!empty($passold_err)) ? 'has-error' : ''; ?>">
+					<label>Staré heslo:</label>
+						<input type="text" name="oldpassword" class="form-control">
+					<span class="help-block"><?php echo $passold_err; ?></span>
+				</div>
 			
-			<div class="form-group">
-                <input type="submit" name="submit" class="btn btn-primary" value="Změnit heslo">
+				<div class="form-group <?php echo (!empty($passnew_err)) ? 'has-error' : ''; ?>">
+					<label>Nové heslo:</label>
+						<input type="password" name="newpassword" class="form-control">
+					<span class="help-block"><?php echo $passnew_err; ?></span>
+				</div>
+			
+				<div class="form-group <?php echo (!empty($passcon_err)) ? 'has-error' : ''; ?>">
+					<label>Potvrzení nového hesla:</label>
+						<input type="password" name="confpassword" class="form-control">
+					<span class="help-block"><?php echo $passcon_err; ?></span>
+				</div>
+				
+				<div class="form-group">
+					<input type="submit" name="submit" class="btn btn-primary" value="Změnit heslo">
+				</div>
 			</div>
+		</form>
+		
+		<hr>
+		
+		<!--<div class="form-group">
+			<label for="switch">Dark mode:</label>
+		</div>-->
+		
+		<div class="container">
+			<a href="first.php" class="btn btn-primary btn-lg btn-block">Zobrazit nápovědu</a>
 		</div>
-	</form>
-	
-	<hr>
-	
-	<!--<div class="form-group">
-		<label for="sel1">Design:</label>
-		<select class="form-control" name ="design" id="sel1">
-			<?php
-				include("parts/deslist.php");
-			?>
-		</select>
-	</div>-->
-	
-	<div class="container">
-		<a href="first.php" class="btn btn-primary btn-lg btn-block">Zobrazit nápovědu</a>
+		<br>
 	</div>
-	<br>
 	<?php
 		include("footer.php");
 	?>

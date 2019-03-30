@@ -1,23 +1,25 @@
 div.diar{
     max-width: fit-content;
     width: -moz-fit-content;
+    line-height: unset;
 }
 div.diar div.dbody{
-    position: relative;
-    width: min-content;
     float: left;
 }
-div.diar div.dbody a{
+div.diar div.dbody div.dframe{
+    position: relative;
+}
+div.diar div.dbody div.dframe a{
     text-decoration: none;
     color: lightseagreen;
     position: absolute;
     top: 0;
 }
-div.diar div.dbody a.leftarrow{
+div.diar div.dbody div.dframe a.leftarrow{
     color: #f85c37;
     left: 0;
 }
-div.diar div.dbody a.rightarrow{
+div.diar div.dbody div.dframe a.rightarrow{
     color: #f85c37;
     right: 0;
 }
@@ -34,78 +36,79 @@ div.diar fieldset.addevent{
     width: max-content;
     width: -moz-max-content;
 }
-div.diar div.dbody div.dtable{
+div.diar div.dbody div.dframe div.dtable{
     margin: 5px 20px;
     width: 505px;
+    min-height: 300px;
     position: relative;
-	font-size: 0;
+    font-size: 0;
 }
-div.diar div.dbody div.dtable div.day{
+div.diar div.dbody div.dframe div.dtable div.day{
     display: inline-block;
     vertical-align: top;
-	font-size: 14px;
-	border-left: 1px solid white;
+    font-size: 14px;
+    border-left: 1px solid white;
 }
-/*div.diar div.dbody div.dtable div.day1{
-    left: 0;
-}
-div.diar div.dbody div.dtable div.day2{
-    left: 100px;
-}
-div.diar div.dbody div.dtable div.day3{
-    left: 200px;
-}
-div.diar div.dbody div.dtable div.day4{
-    left: 300px;
-}
-div.diar div.dbody div.dtable div.day5{
-    left: 400px;
-}*/
-div.diar div.dbody div.dtable div.day div.head{
+div.diar div.dbody div.dframe div.dtable div.day div.head{
     background: #2d2d2d;
     color: white;
     font-weight: bold;
     text-align: center;
     width: 100px;
-	border-bottom: 1px solid white;
 }
-div.diar div.dbody div.dtable div.day div.event{
+div.diar div.dbody div.dframe div.dtable div.day div.event{
     padding: 10px 5px;
     min-width: 90px;
     position: relative;
-	border-bottom: 1px solid white;
-	overflow:hidden;
+    overflow: hidden;
 }
-div.diar div.dbody div.dtable div.day div.event a.remove{
+div.diar div.dbody div.dframe div.dtable div.day div.head, div.diar div.dbody div.dtable div.day div.event{
+    border-bottom: 1px solid white;
+}
+div.diar div.dbody div.dframe div.dtable div.day div.event a.remove{
     position: absolute;
     top: 4px;
     right: 4px;
     color: #2d2d2d;
 }
-div.diar div.dbody div.dtable div.day div.head p{
-    margin: 0;
+div.diar div.dbody div.dframe div.dtable div.day div.head p{
+    margin: 2px 5px;
+    display: inline-block;
 }
-div.diar div.dbody div.dtable div.day div.event p{
+div.diar div.dbody div.dframe div.dtable div.day div.event p{
     margin: 0;
     width: 90px;
     text-align: center;
 }
-div.diar div.dbody div.dtable div.day div.event0, div.diar div.dbody div.legend div.event0{
-    background-color: lightblue;
+div.diar div.dbody div.dframe div.dtable div.day div.event0, div.diar div.dbody div.legend div.event0{
+    background: #a9d1f7;
 }
-div.diar div.dbody div.dtable div.day div.event1, div.diar div.dbody div.legend div.event1{
-    background-color: lightcoral;
+div.diar div.dbody div.dframe div.dtable div.day div.event1, div.diar div.dbody div.legend div.event1{
+    background: #ffdfbe;
 }
-div.diar div.dbody div.dtable div.day div.event2, div.diar div.dbody div.legend div.event2{
-    background-color: lightgreen;
+div.diar div.dbody div.dframe div.dtable div.day div.event2, div.diar div.dbody div.legend div.event2{
+    background: #b4f0a7;
 }
-div.diar div.dbody div.dtable div.day div.event3, div.diar div.dbody div.legend div.event3{
+div.diar div.dbody div.dframe div.dtable div.day div.event3, div.diar div.dbody div.legend div.event3{
     background-color: lightgrey;
 }
-div.diar div.dbody p.diarmsg{
-    width: 500px;
+div.diar div.dbody div.dframe div.dtable div.day div.event6, div.diar div.dbody div.legend div.event6{
+    background: #957dad;
+    color: white;
+}
+div.diar div.dbody div.dframe div.dtable div.day div.event7, div.diar div.dbody div.legend div.event7{
+    background-color: #607D8B;
+    color: white;
+}
+div.diar div.dbody div.dframe div.dtable div.day div.event8, div.diar div.dbody div.legend div.event8{
+    background-color: #4CAF50;
+    color: white;
+}
+div.diar div.dbody div.dframe p.diarmsg, div.diar div.dbody noscript.diarmsg{
+    width: 505px;
     text-align: center;
     margin: 2px auto;
+    border-left: 1px solid white;
 }
 @media screen and (max-width: 768px){
     div.diar fieldset.addevent{
@@ -114,58 +117,60 @@ div.diar div.dbody p.diarmsg{
     }
     div.diar div.dbody{
         float: none;
-        width: 100%;
+        max-width: 100%;
+        width: fit-content;
+        width: -moz-fit-content;
     }
     div.diar{
         float: none;
-        width: 80%;
-        max-width: 600px;
+        width: fit-content;
+        width: -moz-fit-content;
+        max-width: 100%;
+        margin: 5px auto;
     }
-    div.diar div.dbody div.dtable{
-        margin: 5px 20px;
-        max-width: 600px;
-        width: auto;
-        height: auto;
+    div.diar div.dbody div.dframe a{
+        width: 15px;
+        bottom: 0;
+    }
+    div.diar div.dbody div.dframe a i{
+        width: 100%;
+        position: relative;
+        top: 45%;
+    }
+    div.diar div.dbody div.dframe div.dtable{
         position: static;
+        width: auto;
+        max-width: 600px;
+        height: auto;
+        min-height: 0;
     }
-    div.diar div.dbody div.dtable div.day{
+    div.diar div.dbody div.dframe div.dtable div.day{
         display: block;
         position: static;
+        border: 0;
     }
-    div.diar div.dbody div.dtable div.day div.head{
+    div.diar div.dbody div.dframe div.dtable div.day div.head{
         width: 100%;
-        border-top: white solid 2px;
+        border-top: white solid 1px;
     }
-    div.diar div.dbody div.dtable div.day div.event{
+    div.diar div.dbody div.dframe div.dtable div.day div.event{
         padding: 10px 5px;
         min-width: 90px;
     }
-    div.diar div.dbody div.dtable div.day div.event div{
+    div.diar div.dbody div.dframe div.dtable div.day div.event div{
         margin: 0 auto;
         width: fit-content;
         width: -moz-fit-content;
     }
-    div.diar div.dbody div.dtable div.day div.head p{
-        margin: 0;
+    div.diar div.dbody div.dframe div.dtable div.day div.head p{
+        margin: 0 5px;
     }
-    div.diar div.dbody div.dtable div.day div.event div p{
+    div.diar div.dbody div.dframe div.dtable div.day div.event div p{
         display: inline-block;
         width: auto;
         margin: 0 5px;
     }
-    div.diar div.dbody div.dtable div.day div.event0, div.diar div.dbody div.legend div.event0{
-        background-color: lightblue;
-    }
-    div.diar div.dbody div.dtable div.day div.event1, div.diar div.dbody div.legend div.event1{
-        background-color: lightcoral;
-    }
-    div.diar div.dbody div.dtable div.day div.event2, div.diar div.dbody div.legend div.event2{
-        background-color: lightgreen;
-    }
-    div.diar div.dbody div.dtable div.day div.event3, div.diar div.dbody div.legend div.event3{
-        background-color: lightgrey;
-    }
-    div.diar div.dbody p.diarmsg{
+    div.diar div.dbody div.dframe p.diarmsg, div.diar div.dbody noscript p.diarmsg{
         width: auto;
         max-width: 600px;
         text-align: center;

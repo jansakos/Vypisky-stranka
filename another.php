@@ -41,15 +41,15 @@ if (isset($_SESSION['first'])){
   </head>
 
   <body>
-
-    <?php
-     include("header.php");
-	?>
 	
-	<?php
-     include("indev.php");
-	?>
-	
+		<?php
+		 include("header.php");
+		?>
+		<div class="content">
+		<?php
+		 include("indev.php");
+		?>
+	</div>
 	<?php
      include("footer.php");
 	?>

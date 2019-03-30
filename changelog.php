@@ -198,6 +198,27 @@
 				</ul>
 			</td>
 		</tr>
+		<tr>
+			<td><p><b>0.8 CP</b></p></td>
+			<td><p>15.3.2019</p></td>
+			<td>
+				<ul>
+					<li>Oprava kritické chyby v Diáři</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><p><b>0.8.1 (Small update)</b></p></td>
+			<td><p>6.4.2019</p></td>
+			<td>
+				<ul>
+					<li>Hashování hesel (bcrypt)</li>
+					<li>Možnost mazání vlastních výpisků</li>
+					<li>Lehké designové úpravy</li>
+					<li>Oprava odkazů v Chatroom</li>
+				</ul>
+			</td>
+		</tr>
 	</table>
 	
 	<ul>

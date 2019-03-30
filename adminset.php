@@ -65,6 +65,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['username'])&& !empty($
         $password = trim($_POST['password']);
     }
     
+	//bcrypt
+	$hashed_password = password_hash($password, PASSWORD_BCRYPT);
+	
     //Permission
 	if(empty(trim($_POST['permission']))){
         $permission_err = "Nezadána oprávnění.";     
@@ -86,7 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['username'])&& !empty($
             
             // Set parameters
             $param_username = $username;
-            $param_password = $password;
+            $param_password = $hashed_password;
 			$param_permission = $permission;
             
             // Attempt to execute the prepared statement
@@ -94,7 +97,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['username'])&& !empty($
                 // Redirect to login page
                 header("location: login.php");
             } else{
-                echo "Nečekaná chyba.";
+                echo "Nečekaná chyba!";
             }
         }
          
@@ -180,98 +183,101 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['exp']) && !empty($_POS
   </head>
 
   <body>
-  
-  <?php
-	include("header.php")
-  ?>
-  	<div class="container wb">
-		<div class="row_centered">
-			<h2>Nové oznámení</h2>
-			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-					<label>Oznámení</label>
-					<input type="text" name="text" class="form-control" required autocomplete="off">   
-					<label>Určeno pro?</label>
-					<input type="text" name="forwhom" class="form-control" autocomplete="off">
-					<label>Expirace</label>
-					<input type="date" name="exp" class="form-control" required>
-					<label>Typ</label>
-					<select name="type" class="form-control">
-						<option value="1" default>Oznámení</option>
-						<option value="2">Upozornění</option>
-						<option value="3">Varování</option>
-						<option value="4">Výpadek</option>
-					</select> 
-					<span class="help-block"><?php ?></span>
-				
-				<div class="form-group">
-					<input type="submit" class="btn btn-primary" value="Přidat">
-					<input type="reset" class="btn btn-default" value="Reset">
-				</div>
-			</form>
+	
+	  <?php
+		include("header.php")
+	  ?>
+	  <div class="content">
+		<div class="container wb">
+			<div class="row_centered">
+				<h2>Nové oznámení</h2>
+				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+						<label>Oznámení</label>
+						<input type="text" name="text" class="form-control" required autocomplete="off">   
+						<label>Určeno pro?</label>
+						<input type="text" name="forwhom" class="form-control" autocomplete="off">
+						<label>Expirace</label>
+						<input type="date" name="exp" class="form-control" required>
+						<label>Typ</label>
+						<select name="type" class="form-control">
+							<option value="1" default>Oznámení</option>
+							<option value="2">Upozornění</option>
+							<option value="3">Varování</option>
+							<option value="4">Výpadek</option>
+							<option value="5">Úspěch</option>
+							<option value="6">BAN</option>
+						</select> 
+						<span class="help-block"><?php ?></span>
+					
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary" value="Přidat">
+						<input type="reset" class="btn btn-default" value="Reset">
+					</div>
+				</form>
+			</div>
+		</div>
+	  
+		<div class="container wb">
+			<div class="row_centered">
+				<h2>Nový účet</h2>
+				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+					<div <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+						<label>Už. jméno</label>
+						<input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+						<span class="help-block"><?php echo $username_err; ?></span>
+					</div>    
+					<div <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+						<label>Heslo</label>
+						<input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
+						<span class="help-block"><?php echo $password_err; ?></span>
+					</div>
+					<div <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+						<label>Oprávnění</label>
+						<input type="text" name="permission" class="form-control" value="<?php echo $permission; ?>">
+						<span class="help-block"><?php echo $permission_err; ?></span>
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary" value="Přidat">
+						<input type="reset" class="btn btn-default" value="Reset">
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="container">
+			<a href="first.php" class="btn btn-primary btn-lg btn-block">Zobrazit nápovědu</a>
+		</div>
+		
+		<div class="container-w">
+			<h2>Úpravy účtů</h2>
+			<div class="table-responsive">
+				<table class='table table-hover'>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>USERNAME</th>
+							<th>HESLO</th>
+							<th>OPR.</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						$id 	= 1;
+						while ($row = mysqli_fetch_array($query))
+						{
+							echo '<tr>
+									<td>'.$id.'</td>
+									<td>'.$row['username'].'</td>
+									<td>'.$row['password'].'</td>
+									<td>'.$row['permission'].'</td>';	
+								echo '</tr>';
+							$id++;
+						}?>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
-  
-	<div class="container wb">
-		<div class="row_centered">
-			<h2>Nový účet</h2>
-			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-				<div <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-					<label>Už. jméno</label>
-					<input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-					<span class="help-block"><?php echo $username_err; ?></span>
-				</div>    
-				<div <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-					<label>Heslo</label>
-					<input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-					<span class="help-block"><?php echo $password_err; ?></span>
-				</div>
-				<div <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-					<label>Oprávnění</label>
-					<input type="text" name="permission" class="form-control" value="<?php echo $permission; ?>">
-					<span class="help-block"><?php echo $permission_err; ?></span>
-				</div>
-				<div class="form-group">
-					<input type="submit" class="btn btn-primary" value="Přidat">
-					<input type="reset" class="btn btn-default" value="Reset">
-				</div>
-			</form>
-		</div>
-	</div>
-	
-	<div class="container">
-		<a href="first.php" class="btn btn-primary btn-lg btn-block">Zobrazit nápovědu</a>
-	</div>
-	
-	<div class="container-w">
-		<h2>Úpravy účtů</h2>
-		<div class="table-responsive">
-			<table class='table table-hover'>
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>USERNAME</th>
-						<th>HESLO</th>
-						<th>OPR.</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					$id 	= 1;
-					while ($row = mysqli_fetch_array($query))
-					{
-						echo '<tr>
-								<td>'.$id.'</td>
-								<td>'.$row['username'].'</td>
-								<td>'.$row['password'].'</td>
-								<td>'.$row['permission'].'</td>';	
-							echo '</tr>';
-						$id++;
-					}?>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	
 	<?php
      include("footer.php");
 	?>

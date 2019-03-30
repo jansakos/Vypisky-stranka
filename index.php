@@ -21,9 +21,6 @@ switch ($_SESSION['permission']) {
         $diarpermlevel = 0;
         break;
 }
-
-
-
 //pg select
 if(isset($_GET['page']) && is_numeric($_GET['page'])){
     $page = $_GET['page'];
@@ -55,7 +52,7 @@ if(isset($_POST['addevent'])){
         $subj = $_POST['subj'];
         $type = $_POST['type'];
         $date = $_POST['date'];
-        $namet = substr($name, 0, 30);
+        $namet = htmlspecialchars(substr($name, 0, 30));
         if(is_numeric($type)){
             $typet = substr($type, 0, 1);
             if(strlen($date) == 10){
@@ -65,7 +62,7 @@ if(isset($_POST['addevent'])){
                 $datepar = intval($dateday).". ".intval($datemon).".";
                 if($subj == "c" || $subj == "m" || $subj == "a" || $subj == "d" || $subj == "hv" || $subj == "vv" || $subj == "f" || $subj == "in" || $subj == "n" || $subj == "s" || $subj == "fr" || $subj == "tv" || $subj == "bi" || $subj == "z" || $subj == "ch" || $subj == "sv"){
                     if(!empty($_POST['othtype'])){
-                        $othtypet = substr($_POST['othtype'], 0, 20);
+                        $othtypet = htmlspecialchars(substr($_POST['othtype'], 0, 20));
                         if(mysqli_num_rows(mysqli_query($link, "SELECT * FROM `diar` WHERE date='".$datepar."' AND subj='".$subj."' AND type='".$typet."' AND name='".$namet."' AND othtype='".$othtypet."'")) != 0){
                             $diarmsg = "Událost již existuje";
                             $diarmsgc = "lightcoral";
@@ -174,14 +171,20 @@ function typename($typedbnum){
         case 3:
             return "Jiné";
             break;
-        /*case 4:
+        case 4:
             return "Státní svátek";
             break;
         case 5:
             return "Prázdniny";
-            break;*/
+            break;
         case 6:
             return "Olympiáda";
+            break;
+        case 7:
+            return "Exkurze";
+            break;
+        case 8:
+            return "Úkol";
             break;
         default:
             return "Neznámý typ (".$typedbnum.")";
@@ -625,7 +628,7 @@ $frievents = mysqli_query($link, "SELECT * FROM diar WHERE date='".$fridate."'")
 	<?php
 		include("parts/head.php");
 	?>
-    <title>Jaroška | Výpisky</title>
+    <title>Úvod | Výpisky</title>
 	
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
@@ -647,176 +650,191 @@ $frievents = mysqli_query($link, "SELECT * FROM diar WHERE date='".$fridate."'")
     </script>
   </head>
 
-  <body class="x-body">
-  	<?php
-     include("header.php");
-	?>	
-	
-	<?php 
-		include("config.php");
-		
-		$query = "DELETE FROM notif WHERE exp < CURDATE()";
-			$stmt= $pdo->prepare($query);
-			$run = $stmt->execute();
-		
-		$query = "SELECT * FROM notif ORDER BY id";
-			$stmt= $pdo->prepare($query);
-			$run = $stmt->execute();
+	  <body class="x-body">
+		<?php
+		 include("header.php");
+		?>	
+			<div class="content">
+		<?php 
+			include("config.php");
 			
-			$rs = $stmt->fetchAll(PDO::FETCH_OBJ);
+			$query = "DELETE FROM notif WHERE exp < CURDATE()";
+				$stmt= $pdo->prepare($query);
+				$run = $stmt->execute();
 			
-			$notifall="";
-			
-			foreach( $rs as $notif ){
+			$query = "SELECT * FROM notif ORDER BY id";
+				$stmt= $pdo->prepare($query);
+				$run = $stmt->execute();
 				
-				if(($_SESSION['username']) == $notif->tothe || $notif->tothe == ""){
+				$rs = $stmt->fetchAll(PDO::FETCH_OBJ);
+				
+				$notifall="";
+				
+				foreach( $rs as $notif ){
+					
+					if(($_SESSION['username']) == $notif->tothe || $notif->tothe == ""){
 
-					if (($notif->type)== "1"){
-					$notifall .= '<div class="alert alert-info">'.$notif->text.'</div>';
-					}
-					if (($notif->type)== "2"){
-					$notifall .= '<div class="alert alert-warning">'.$notif->text.'</div>';
-					}
-					if (($notif->type)== "3"){
-					$notifall .= '<div class="alert alert-danger">'.$notif->text.'</div>';
-					}
-					if (($notif->type)== "4"){
-					$notifall .= '<div class="alert alert-danger"><strong>Plánovaný výpadek:</strong> Dne '.$notif->exp.' je naplánován výpadek, Výpisky mohou být nedostupné!</div>';
+						if (($notif->type)== "1"){
+							$notifall .= '<div class="alert alert-info">'.$notif->text.'</div>';
+						}
+						if (($notif->type)== "2"){
+							$notifall .= '<div class="alert alert-warning">'.$notif->text.'</div>';
+						}
+						if (($notif->type)== "3"){
+							$notifall .= '<div class="alert alert-danger">'.$notif->text.'</div>';
+						}
+						if (($notif->type)== "4"){
+							$expdate = strtotime($notif->exp);
+							$formdate = date( 'd. m. Y', $expdate );
+							$notifall .= '<div class="alert alert-danger"><strong>Plánovaný výpadek:</strong> Dne '.$formdate.' z důvodu: '.$notif->text.' </div>';
+						}
+						if (($notif->type)== "5"){
+							$notifall .= '<div class="alert alert-success">'.$notif->text.'</div>';
+						}
+						if (($notif->type)== "6"){
+							$bandate = strtotime($notif->exp);
+							$formban = date( 'd. m. Y', $bandate );
+							$notifall .= '<div class="alert alert-danger"><strong>Ban:</strong> do dne '.$formban.' z důvodu: '.$notif->text.' </div>';
+						}
 					}
 				}
-			}
-		echo $notifall;
-	?>
-	
-	<div class="container">
-	<fieldset style="margin: 0 auto;">
-            <legend>Diář</legend>
-            <?php if($diarpermlevel >= 0){ ?>
-            <div class="diar">
-                <div class="dbody">
-                    <div class="dframe">
-                        <?php if($page-1 >= -1){ ?><a class="leftarrow" href="?page=<?php echo $page-1; ?>"><i class="fa fa-chevron-left"></i></a><?php } ?>
-                        <?php if($page+1 <= 1){ ?><a class="rightarrow" href="?page=<?php echo $page+1; ?>"><i class="fa fa-chevron-right"></i></a><?php } ?>
-                        <?php if(isset($diarmsg)){ echo "<p class=\"diarmsg\" style=\"background-color: ".$diarmsgc.";\">".$diarmsg."</p>"; } ?>
-                        <noscript><p class="diarmsg" style="background-color: lightblue;">Pro všechny funkce je požadován JavaScript</p></noscript>
-                        <div class="dtable">
-                            <div class="day">
-                                <div class="head">
-                                    <p><?php echo $mondate; ?></p><p>Po</p>
-                                </div>
-                                <?php for($i = 1;$i <= 5;$i++){ 
-                                        while($monrow = mysqli_fetch_array($monevents)){ ?>
-                                        <div class="event event<?php echo $monrow['type']; ?>">
-                                            <?php if($diarpermlevel >= 2){ ?><a class="remove" href="?rmid=<?php echo $monrow['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a><?php } ?>
-                                            <div><p><?php echo subjname($monrow['subj']); ?></p><p><?php if($monrow['type'] == 3){ if(empty($monrow['othtype'])){ echo "Nespecifikováno"; }else{ echo $monrow['othtype']; } }else{ echo typename($monrow['type']); } ?></p><p><?php echo $monrow['name']; ?></p></div>
-                                        </div>
-                                <?php }} ?>
-                            </div>
-                            <div class="day">
-                                <div class="head">
-                                    <p><?php echo $tuedate; ?></p><p>Út</p>
-                                </div>
-                                <?php for($i = 1;$i <= 5;$i++){ 
-                                        while($tuerow = mysqli_fetch_array($tueevents)){ ?>
-                                        <div class="event event<?php echo $tuerow['type']; ?>">
-                                            <?php if($diarpermlevel >= 2){ ?><a class="remove" href="?rmid=<?php echo $tuerow['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a><?php } ?>
-                                            <div><p><?php echo subjname($tuerow['subj']); ?></p><p><?php if($tuerow['type'] == 3){ if(empty($tuerow['othtype'])){ echo "Nespecifikováno"; }else{ echo $tuerow['othtype']; } }else{ echo typename($tuerow['type']); } ?></p><p><?php echo $tuerow['name']; ?></p></div>
-                                        </div>
-                                <?php }} ?>
-                            </div>
-                            <div class="day">
-                                <div class="head">
-                                    <p><?php echo $weddate; ?></p><p>St</p>
-                                </div>
-                                <?php for($i = 1;$i <= 5;$i++){ 
-                                        while($wedrow = mysqli_fetch_array($wedevents)){ ?>
-                                        <div class="event event<?php echo $wedrow['type']; ?>">
-                                            <?php if($diarpermlevel >= 2){ ?><a class="remove" href="?rmid=<?php echo $wedrow['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a><?php } ?>
-                                            <div><p><?php echo subjname($wedrow['subj']); ?></p><p><?php if($wedrow['type'] == 3){ if(empty($wedrow['othtype'])){ echo "Nespecifikováno"; }else{ echo $wedrow['othtype']; } }else{ echo typename($wedrow['type']); } ?></p><p><?php echo $wedrow['name']; ?></p></div>
-                                        </div>
-                                <?php }} ?>
-                            </div>
-                            <div class="day">
-                                <div class="head">
-                                    <p><?php echo $thudate; ?></p><p>Čt</p>
-                                </div>
-                                <?php for($i = 1;$i <= 5;$i++){ 
-                                        while($thurow = mysqli_fetch_array($thuevents)){ ?>
-                                        <div class="event event<?php echo $thurow['type']; ?>">
-                                            <?php if($diarpermlevel >= 2){ ?><a class="remove" href="?rmid=<?php echo $thurow['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a><?php } ?>
-                                            <div><p><?php echo subjname($thurow['subj']); ?></p><p><?php if($thurow['type'] == 3){ if(empty($thurow['othtype'])){ echo "Nespecifikováno"; }else{ echo $thurow['othtype']; } }else{ echo typename($thurow['type']); } ?></p><p><?php echo $thurow['name']; ?></p></div>
-                                        </div>
-                                <?php }} ?>
-                            </div>
-                            <div class="day">
-                                <div class="head">
-                                    <p><?php echo $fridate; ?></p><p>Pá</p>
-                                </div>
-                                <?php for($i = 1;$i <= 5;$i++){ 
-                                        while($frirow = mysqli_fetch_array($frievents)){ ?>
-                                        <div class="event event<?php echo $frirow['type']; ?>">
-                                            <?php if($diarpermlevel >= 2){ ?><a class="remove" href="?rmid=<?php echo $frirow['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a><?php } ?>
-                                            <div><p><?php echo subjname($frirow['subj']); ?></p><p><?php if($frirow['type'] == 3){ if(empty($frirow['othtype'])){ echo "Nespecifikováno"; }else{ echo $frirow['othtype']; } }else{ echo typename($frirow['type']); } ?></p><p><?php echo $frirow['name']; ?></p></div>
-                                        </div>
-                                <?php }} ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="legend">
-                        <p>Legenda</p>
-                        <div class="event0"><p>Písemka</p></div>
-                        <div class="event1"><p>Dopisování</p></div>
-                        <div class="event2"><p>Dozkušování</p></div>
-                        <!--<div class="event4"><p>Státní svátek</p></div>
-                        <div class="event5"><p>Prázdniny</p></div>-->
-                        <div class="event6"><p>Olympiáda</p></div>
-                        <div class="event3"><p>Jiné</p></div>
-                    </div>
-                </div>
-                <?php if($diarpermlevel >= 1){ ?>
-                <fieldset class="addevent">
-                    <legend>Přidat událost</legend>
-                    <form method="post" action="#">
-                        <p><label for="date">Datum</label> <input class="form-control" type="date" name="date" id="date" required /></p>
-                        <p><label for="subj">Předmět</label> 
-                            <select class="form-control" name="subj" id="subj" required>
-                                <option value="c">Č / Čcv</option>
-                                <option value="m">M / Mcv</option>
-                                <option value="a">A</option>
-                                <option value="d">D</option>
-                                <option value="f">F</option>
-                                <option value="hv">Hv</option>
-                                <option value="vv">Vv</option>
-                                <option value="in">In</option>
-                                <option value="n">N</option>
-                                <option value="s">Š</option>
-                                <option value="fr">Fr</option>
-                                <option value="tv">Tv</option>
-                                <option value="bi">Bi / Bicv</option>
-                                <option value="z">Z</option>
-                                <option value="ch">Ch / Chcv</option>
-                                <option value="sv">Sv</option>
-                            </select></p>
-                        <p><label for="type">Typ</label> 
-                            <select class="form-control" name="type" id="type" onchange="tothtype()" required>
-                                <option value="0">Písemka</option>
-                                <option value="1">Dopisování</option>
-                                <option value="2">Dozkušování</option>
-                                <!--<option value="4">Státní svátek</option>
-                                <option value="5">Prázdniny</option>-->
-                                <option value="6">Olympiáda</option>
-                                <option value="3">Jiné</option>
-                            </select> <input type="text" name="othtype" id="othtype" hidden maxlength="20" /></p>
-                        <p><label for="name">Téma</label> <input class="form-control" type="text" name="name" id="name" required maxlength="30" autocomplete="off" /></p>
-                        <p><input class="btn btn-primary" type="submit" name="addevent" value="Přidat událost" /></p>
-                    </form>
-                </fieldset>
-                <?php } ?>
-            </div>
-            <?php }else{ ?>
-            <p>Na zobrazení diáře nemáte dostatečná práva</p>
-            <?php } ?>
-        </fieldset>
+			echo $notifall;
+		?>
+		
+		<div class="container">
+		<fieldset style="margin: 0 auto;">
+				<legend>Diář</legend>
+				<?php if($diarpermlevel >= 0){ ?>
+				<div class="diar">
+					<div class="dbody">
+						<div class="dframe">
+							<?php if($page-1 >= -1){ ?><a class="leftarrow" href="?page=<?php echo $page-1; ?>"><i class="fa fa-chevron-left"></i></a><?php } ?>
+							<?php if($page+1 <= 1){ ?><a class="rightarrow" href="?page=<?php echo $page+1; ?>"><i class="fa fa-chevron-right"></i></a><?php } ?>
+							<?php if(isset($diarmsg)){ echo "<p class=\"diarmsg\" style=\"background-color: ".$diarmsgc.";\">".$diarmsg."</p>"; } ?>
+							<noscript><p class="diarmsg" style="background-color: lightblue;">Pro všechny funkce je požadován JavaScript</p></noscript>
+							<div class="dtable">
+								<div class="day">
+									<div class="head">
+										<p><?php echo $mondate; ?></p><p>Po</p>
+									</div>
+									<?php for($i = 1;$i <= 5;$i++){ 
+											while($monrow = mysqli_fetch_array($monevents)){ ?>
+											<div class="event event<?php echo $monrow['type']; ?>">
+												<?php if($diarpermlevel >= 2){ ?><a class="remove" href="?rmid=<?php echo $monrow['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a><?php } ?>
+												<div><p><?php echo subjname($monrow['subj']); ?></p><p><?php if($monrow['type'] == 3){ if(empty($monrow['othtype'])){ echo "Nespecifikováno"; }else{ echo $monrow['othtype']; } }else{ echo typename($monrow['type']); } ?></p><p><?php echo $monrow['name']; ?></p></div>
+											</div>
+									<?php }} ?>
+								</div>
+								<div class="day">
+									<div class="head">
+										<p><?php echo $tuedate; ?></p><p>Út</p>
+									</div>
+									<?php for($i = 1;$i <= 5;$i++){ 
+											while($tuerow = mysqli_fetch_array($tueevents)){ ?>
+											<div class="event event<?php echo $tuerow['type']; ?>">
+												<?php if($diarpermlevel >= 2){ ?><a class="remove" href="?rmid=<?php echo $tuerow['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a><?php } ?>
+												<div><p><?php echo subjname($tuerow['subj']); ?></p><p><?php if($tuerow['type'] == 3){ if(empty($tuerow['othtype'])){ echo "Nespecifikováno"; }else{ echo $tuerow['othtype']; } }else{ echo typename($tuerow['type']); } ?></p><p><?php echo $tuerow['name']; ?></p></div>
+											</div>
+									<?php }} ?>
+								</div>
+								<div class="day">
+									<div class="head">
+										<p><?php echo $weddate; ?></p><p>St</p>
+									</div>
+									<?php for($i = 1;$i <= 5;$i++){ 
+											while($wedrow = mysqli_fetch_array($wedevents)){ ?>
+											<div class="event event<?php echo $wedrow['type']; ?>">
+												<?php if($diarpermlevel >= 2){ ?><a class="remove" href="?rmid=<?php echo $wedrow['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a><?php } ?>
+												<div><p><?php echo subjname($wedrow['subj']); ?></p><p><?php if($wedrow['type'] == 3){ if(empty($wedrow['othtype'])){ echo "Nespecifikováno"; }else{ echo $wedrow['othtype']; } }else{ echo typename($wedrow['type']); } ?></p><p><?php echo $wedrow['name']; ?></p></div>
+											</div>
+									<?php }} ?>
+								</div>
+								<div class="day">
+									<div class="head">
+										<p><?php echo $thudate; ?></p><p>Čt</p>
+									</div>
+									<?php for($i = 1;$i <= 5;$i++){ 
+											while($thurow = mysqli_fetch_array($thuevents)){ ?>
+											<div class="event event<?php echo $thurow['type']; ?>">
+												<?php if($diarpermlevel >= 2){ ?><a class="remove" href="?rmid=<?php echo $thurow['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a><?php } ?>
+												<div><p><?php echo subjname($thurow['subj']); ?></p><p><?php if($thurow['type'] == 3){ if(empty($thurow['othtype'])){ echo "Nespecifikováno"; }else{ echo $thurow['othtype']; } }else{ echo typename($thurow['type']); } ?></p><p><?php echo $thurow['name']; ?></p></div>
+											</div>
+									<?php }} ?>
+								</div>
+								<div class="day">
+									<div class="head">
+										<p><?php echo $fridate; ?></p><p>Pá</p>
+									</div>
+									<?php for($i = 1;$i <= 5;$i++){ 
+											while($frirow = mysqli_fetch_array($frievents)){ ?>
+											<div class="event event<?php echo $frirow['type']; ?>">
+												<?php if($diarpermlevel >= 2){ ?><a class="remove" href="?rmid=<?php echo $frirow['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a><?php } ?>
+												<div><p><?php echo subjname($frirow['subj']); ?></p><p><?php if($frirow['type'] == 3){ if(empty($frirow['othtype'])){ echo "Nespecifikováno"; }else{ echo $frirow['othtype']; } }else{ echo typename($frirow['type']); } ?></p><p><?php echo $frirow['name']; ?></p></div>
+											</div>
+									<?php }} ?>
+								</div>
+							</div>
+						</div>
+						<div class="legend">
+							<p>Legenda</p>
+							<div class="event0"><p>Písemka</p></div>
+							<div class="event1"><p>Dopisování</p></div>
+							<div class="event2"><p>Dozkušování</p></div>
+							<div class="event8"><p>Úkol</p></div>
+							<!--div class="event4"><p>Státní svátek</p></div>
+							<div class="event5"><p>Prázdniny</p></div-->
+							<div class="event6"><p>Olympiáda</p></div>
+							<div class="event7"><p>Exkurze</p></div>
+							<div class="event3"><p>Jiné</p></div>
+						</div>
+					</div>
+					<?php if($diarpermlevel >= 1){ ?>
+					<fieldset class="addevent">
+						<legend>Přidat událost</legend>
+						<form method="post" action="#">
+							<p><label for="date">Datum</label> <input class="form-control" type="date" name="date" id="date" required /></p>
+							<p><label for="subj">Předmět</label> 
+								<select class="form-control" name="subj" id="subj" required>
+									<option value="c">Č / Čcv</option>
+									<option value="m">M / Mcv</option>
+									<option value="a">A</option>
+									<option value="d">D</option>
+									<option value="f">F</option>
+									<option value="hv">Hv</option>
+									<option value="vv">Vv</option>
+									<option value="in">In</option>
+									<option value="n">N</option>
+									<option value="s">Š</option>
+									<option value="fr">Fr</option>
+									<option value="tv">Tv</option>
+									<option value="bi">Bi / Bicv</option>
+									<option value="z">Z</option>
+									<option value="ch">Ch / Chcv</option>
+									<option value="sv">Sv</option>
+								</select></p>
+							<p><label for="type">Typ</label> 
+								<select class="form-control" name="type" id="type" onchange="tothtype()" required>
+									<option value="0">Písemka</option>
+									<option value="1">Dopisování</option>
+									<option value="2">Dozkušování</option>
+									<option value="8">Úkol  </option>
+									<!--option value="4">Státní svátek</option>
+									<option value="5">Prázdniny</option-->
+									<option value="6">Olympiáda</option>
+									<option value="7">Exkurze</option>
+									<option value="3">Jiné</option>
+								</select> <input type="text" name="othtype" id="othtype" hidden maxlength="20" /></p>
+							<p><label for="name">Téma</label> <input class="form-control" type="text" name="name" id="name" required maxlength="30" autocomplete="off" /></p>
+							<p><input class="btn btn-primary" type="submit" name="addevent" value="Přidat událost" /></p>
+						</form>
+					</fieldset>
+					<?php } ?>
+				</div>
+				<?php }else{ ?>
+				<p>Na zobrazení diáře nemáte dostatečná práva</p>
+				<?php } ?>
+			</fieldset>
+			</div>
 		</div>
 		<?php
      include("footer.php");
