@@ -34,7 +34,7 @@
 	<div id="notfound">
 		<div class="notfound">
 			<h1>504 – Gateway Timeout!</h1>
-			<h2>Omlouváme se, server neobdržel včas odpověď včas.</h2> Může se jednat o dočasný výpadek, zkuste stránku načíst znovu později. Pokud problém přetrvává, kontaktujte Administraci Výpisků.<br>
+			<h2>Omlouváme se, server neobdržel odpověď včas.</h2> Může se jednat o dočasný výpadek, zkuste stránku načíst znovu později. Pokud problém přetrvává, kontaktujte Administraci Výpisků.<br>
 			<a href="../index.php">Přejít na úvod</a>
 	</div>
 	</div>

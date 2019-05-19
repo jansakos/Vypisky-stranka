@@ -11,9 +11,9 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="download.php">VÝPISKY</a></li>
+			<li><a href="archive.php" title="Ve vývoji">ARCHIV</a></li>
 			<li><a href="chat.php">CHATROOM</a></li>
 			<li><a href="set.php">NASTAVENÍ</a></li>
-			<li><a href="another.php" title="Ve vývoji">DALŠÍ</a></li>
 			<!--<li><a href="#" title="WIP"><i class="fa fa-bell"></i></a></li>-->
 			<li><a href="logout.php" title="Odhlášení"><i class="fa fa-sign-out"></i></a></li>
           </ul>

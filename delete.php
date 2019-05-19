@@ -1,30 +1,45 @@
 <?php
-session_start();
-if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-	header("location: login.php");
-	exit;
-}
-if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w"){
-	header("location: download.php");
-	exit;
-}
+	// User logged in
+	session_start();
+	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+		header("location: login.php");
+		exit;
+	}
+
+	// Veritification of user
+	if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w"){
+		header("location: download.php");
+		exit;
+	}
 ?>
 
 <?php
-include ('config.php');
-
-$id = ($_GET['id']);
-
-//DODĚLAT OVĚŘENÍ UŽIVATELE
-		$sql = 'DELETE FROM files
-				WHERE id="'.$id.'"';
+	include ('config.php');
+	
+	// Select file
+	$id = ($_GET['id']);
+	$sql = 'SELECT author FROM files WHERE id="'.$id.'"';
+	$query = mysqli_query($link, $sql);
+	if (!$query) {
+		die ('SQL chyba: ' . mysqli_error($link));
+	}else{
+		while ($row = mysqli_fetch_array($query)){
+			$author = $row['author'];
+		}
+	}
+		
+	// Deleting file
+	if(($author == $_SESSION['username'])||($_SESSION['permission'])=="o"){
+		$sql = 'DELETE FROM files WHERE id="'.$id.'"';
 		if ($link->query($sql) === TRUE) {
 			echo "Úspěšně smazáno";
 		} else {
 			echo "Nastala chyba při mazání: " . $link->error;
 		}
-
-		$link->close();
+	}else{
+		echo "Nesmíte mazat cizí výpisky.";
+	}
+	$link->close();
 ?>
 
 <!DOCTYPE html>
@@ -44,12 +59,17 @@ $id = ($_GET['id']);
 	<title>Mazání...</title>
   </head>
   
-<body>
+  <body>
 	<?php
-	$address = ($_GET['address']);
-	unlink($address);
+		// Delete file
+		$address = ($_GET['address']);
+		if(file_exists($address)){		
+			unlink($address);
 			header("location: download.php");
 			exit;
+		}else{
+			header("location: download.php");
+		}
 	?>
-</body>
+  </body>
 </html>

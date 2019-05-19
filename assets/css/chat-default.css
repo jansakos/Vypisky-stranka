@@ -134,6 +134,7 @@ margin:0 0 2px 0;
 	padding:5px 10px 5px 10px;
 	border:1px solid #b3b3b3;
 	border-radius:5px;
+	word-wrap: break-word; 
 }
 .single-picture{
 	max-width:70%;

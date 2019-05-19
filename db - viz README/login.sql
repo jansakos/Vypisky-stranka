@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1:3306
--- Vytvořeno: Úte 05. bře 2019, 16:19
+-- Vytvořeno: Ned 19. kvě 2019, 10:22
 -- Verze serveru: 5.7.21
 -- Verze PHP: 7.2.4
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Databáze: ``
+-- Databáze: `login`
 --
 
 -- --------------------------------------------------------
@@ -31,13 +31,13 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `login`;
 CREATE TABLE IF NOT EXISTS `login` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
-  `username` varchar(6) NOT NULL,
-  `password` varchar(120) CHARACTER SET latin2 COLLATE latin2_czech_cs NOT NULL,
-  `permission` char(1) NOT NULL,
+  `username` varchar(6) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `password` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `permission` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `first` tinyint(1) NOT NULL DEFAULT '1',
-  `design` varchar(15) NOT NULL DEFAULT 'default',
+  `design` varchar(15) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'default',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

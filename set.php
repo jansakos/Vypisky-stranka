@@ -1,85 +1,112 @@
 <?php
-session_start();
-if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
-	header("location: login.php");
-	exit;
-}
-if(($_SESSION['permission']) == "o"){
-	header("location: adminset.php");
-	exit;
-}
-
-$passold_err = $passnew_err = $passcon_err = '';
-$user = $_SESSION['username'];
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+	// User logged in?
+	session_start();
+	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+		header("location: login.php");
+		exit;
+	}
 	
-	//checking fields
-	$oldpassword = $_POST['oldpassword'];
-	$newpassword = $_POST['newpassword'];
-	$confpassword = $_POST['confpassword'];
-	
-	//check old password
+	// adminset.php redirection
+	if(($_SESSION['permission']) == "o"){
+		header("location: adminset.php");
+		exit;
+	}
+
+	// Vars empty setting 
+	$passold_err = $passnew_err = $passcon_err = '';
+	$user = $_SESSION['username'];
 	include ('config.php');
-	$queryget = mysqli_query($link, "SELECT password FROM login WHERE username='$user'") or die("Neprobehlo uspesne pripojeni k databazi.");
-	$row = mysqli_fetch_assoc($queryget);
-	$oldpassworddb = $row['password'];
-	
-	if (!password_verify($oldpassword, $oldpassworddb)){
-			$passold_err = "Napsané heslo se neshoduje se starým!";
-		}else{
-	
-		if ($newpassword == ""){
-			$passnew_err = "Nenapsali jste nové heslo!";
-		}else{
-	
-			//check newpassword and confpassword
-			if ($newpassword != $confpassword){
-				$passcon_err = "Nové heslo a jeho kontrola se neshodují!";
+
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		
+		// Set variables
+		$oldpassword = $_POST['oldpassword'];
+		$newpassword = $_POST['newpassword'];
+		$confpassword = $_POST['confpassword'];
+		
+		// Old password checking
+		$queryget = mysqli_query($link, "SELECT password FROM login WHERE username='$user'") or die("Neprobehlo uspesne pripojeni k databazi.");
+		$row = mysqli_fetch_assoc($queryget);
+		$oldpassworddb = $row['password'];
+		
+		// Old password verifying
+		if (!password_verify($oldpassword, $oldpassworddb)){
+				$passold_err = "Napsané heslo se neshoduje se starým!";
 			}else{
-				
-				if ($newpassword == $oldpassword){
-					$passnew_err = "Nové heslo a staré heslo jsou stejné!";
+		
+			// New password not empty
+			if ($newpassword == ""){
+				$passnew_err = "Nenapsali jste nové heslo!";
+			}else{
+		
+				// New password confirm
+				if ($newpassword != $confpassword){
+					$passcon_err = "Nové heslo a jeho kontrola se neshodují!";
 				}else{
-			
-					//bcrypt
-					$hashed_password = password_hash($newpassword, PASSWORD_BCRYPT);
 					
-					//change password
-					$querychange = mysqli_query($link, "
-					UPDATE login SET password='$hashed_password' WHERE username='$user'
-					");
-					session_destroy();
-					header("location: login.php");
-					exit;
+					// Difference between new and old paswords
+					if ($newpassword == $oldpassword){
+						$passnew_err = "Nové heslo a staré heslo jsou stejné!";
+					}else{
+				
+						// Crypt new password
+						$hashed_password = password_hash($newpassword, PASSWORD_BCRYPT);
+						
+						// Change password in MySQL
+						$querychange = mysqli_query($link, "UPDATE login SET password='$hashed_password' WHERE username='$user'");
+						session_destroy();
+						header("location: login.php");
+						exit;
+					}
 				}
 			}
 		}
 	}
-}
+
+	// Design changer
+	$design = array('dark', 'default');
+	$newdesign= "default";
+	
+	// Array confirm
+	if (isset($_GET['design']) && in_array($_GET['design'], $design)) {
+			$newdesign = $_GET['design'];
+			$_SESSION['design'] = $newdesign;
+			
+			$sql = "UPDATE login SET design='$newdesign' WHERE username='$user'";
+			 
+			if($stmt = mysqli_prepare($link, $sql)){
+				if(mysqli_stmt_execute($stmt)){
+				}
+			}
+			 
+			// Close statement
+			mysqli_stmt_close($stmt);
+		}
+		
+	// Close connection
+	mysqli_close($link);
 ?>
 <!DOCTYPE html>
 <html lang="cs">
   <head>
 	<?php
-     include("parts/head.php");
+		include("parts/head.php");
+	 	echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
 	?>
-    <title>Nastavení účtu | Výpisky</title>
-	
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+	<title>Nastavení účtu | Výpisky</title>
   </head>
 
   <body class="x-body">
-	
 		<?php
 			include("header.php")
 		?>
 		<div class="content">
+		
 		<form method="post" action="set.php" autocomplete="off">
 			<div class="container">   
 				<div class="form-group <?php echo (!empty($passold_err)) ? 'has-error' : ''; ?>">
@@ -108,13 +135,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		
 		<hr>
 		
-		<!--<div class="form-group">
-			<label for="switch">Dark mode:</label>
-		</div>-->
+		<div class="container">
+			<div class="form-group">
+				<?php
+					if($_SESSION["design"]!="dark"){
+						echo "<label for='switch'>Tmavý režim:</label> <a href='?design=dark' title='Tmavý režim' id='switch' class='btn btn-primary btn-lg'><i class='fa big-icon fa-moon-o'></i></a>";
+					}else{
+						echo "<label for='switch'>Světlý režim:</label> <a href='?design=default' title='Světlý režim' id='switch' class='btn btn-primary btn-lg'><i class='fa big-icon fa-eye'></i></a>";
+					}
+				?>
+			</div>
+		</div>
 		
 		<div class="container">
 			<a href="first.php" class="btn btn-primary btn-lg btn-block">Zobrazit nápovědu</a>
 		</div>
+		
 		<br>
 	</div>
 	<?php

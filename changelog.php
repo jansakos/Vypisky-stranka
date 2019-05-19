@@ -216,6 +216,31 @@
 					<li>Možnost mazání vlastních výpisků</li>
 					<li>Lehké designové úpravy</li>
 					<li>Oprava odkazů v Chatroom</li>
+					<li>Nekonečný diář</li>
+					<li>Sjednocení předmětů</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><p><b>0.8.2 (Technical update)</b></p></td>
+			<td><p><i>Zrušen</i></p></td>
+			<td>
+				<ul>
+					<li>Přidání možnosti stažení</li>
+					<li>Pokročilá správa stránky skrze web</li>
+					<li>Přidání moderátorů</li>
+					<li>Vylepšení sw</li>
+					<li>Nové ikony</i>
+					<li>Lehké optimalizace</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><p><b>0.9 (Archive update)</b></p></td>
+			<td><p><i>???</i></p></td>
+			<td>
+				<ul>
+					<li>Pokročilá konfigurace z webu</li>
 				</ul>
 			</td>
 		</tr>
