@@ -21,7 +21,7 @@ Součástí tohoto projektu je i jednoduchá chatroom s podporou odkazů a obrá
 - "w" (=writer) - možnost přidávat události a nahrávat výpisky o velikosti až 2 MB
 - "u" (=untrusted writer) - totožné, jako "writer", jen velikost výpisků je max. 250 kB
 - "r" (=reader) - uživatel, který nesmí výpisky nahrávat, pouze stahovat
-- "a" (=abased) - totožné, jako "reader", ale bez přístupu k Chatroom
+- "n" (=nagger) - totožné, jako "reader", ale bez přístupu k Chatroom
 - "p" (=paused) - pozastavený účet, bez možnosti přihlášení
 
 > Vyvíjeno ve spolupráci s @github/vojta478
