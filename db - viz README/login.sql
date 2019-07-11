@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1:3306
--- Vytvořeno: Ned 19. kvě 2019, 10:22
+-- Vytvořeno: Stř 10. čec 2019, 20:04
 -- Verze serveru: 5.7.21
 -- Verze PHP: 7.2.4
 
@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `design` varchar(15) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'default',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

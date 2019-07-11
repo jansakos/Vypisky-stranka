@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1:3306
--- Vytvořeno: Ned 19. kvě 2019, 10:21
+-- Vytvořeno: Stř 10. čec 2019, 20:01
 -- Verze serveru: 5.7.21
 -- Verze PHP: 7.2.4
 
@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS `chat` (
   `type` tinyint(1) NOT NULL DEFAULT '1',
   `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=168 DEFAULT CHARSET=utf8;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

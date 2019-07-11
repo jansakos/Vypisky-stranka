@@ -18,14 +18,19 @@
     <?php
 		// Set design
 		include("parts/head.php");
-		echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
-		echo "<link href='assets/css/chat-". $_SESSION['design']. ".css' rel='stylesheet'>";
+		if (isset($_SESSION['design'])){
+			echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
+			echo "<link href='assets/css/chat-". $_SESSION['design']. ".css' rel='stylesheet'>";
+		}else{
+			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>";
+			echo "<link href='assets/css/chat-default.css' rel='stylesheet'>";
+		}
 	?>
     <title>Chatroom | Výpisky</title>
 	
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
-	<script src="assets/js/jquery-3.3.1.min.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
   </head>
 
@@ -61,12 +66,12 @@
 							<ul id="imgmenu" class="dropdown-menu dropdown-menu-center">
 								<div class="centered">
 									<li><span class="info">Je povoleno nahrávat obrázky do velikosti<br> 5 MB typu jpg, png a gif.<span><br><br></li>
-									<li><input type="file" id="file" name="obrazky" required data-keepOpenOnClick class="btn btn-default"><br></li>
+									<li><input type="file" id="file" name="obrazky" required data-keepOpenOnClick class="btn btn-block btn-default"><br></li>
 									<li><button id='process-file-button' class="btn btn-primary mb-2">Nahrát</button></li>
 									<div class="progress">
 										<div class="progress-bar" role="progressbar" aria-valuenow="70"
 										aria-valuemin="0" aria-valuemax="100" style="width:0%">
-											0%
+											WIP
 										</div>
 									</div> 
 								</div>

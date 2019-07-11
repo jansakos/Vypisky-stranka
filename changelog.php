@@ -4,7 +4,7 @@
     <?php
 		include("parts/head.php");
 	?>
-	<title>Jaroška | Výpisky</title>
+	<title>Changelog | Výpisky</title>
   </head>
 
 <body>
@@ -240,7 +240,21 @@
 			<td><p><i>???</i></p></td>
 			<td>
 				<ul>
-					<li>Pokročilá konfigurace z webu</li>
+					<li>Archiv součástí hlavní stránky</li>
+					<li>Automatická archivace výpisků</li>
+					<li>Redesign download sekce</li>
+					<li>Dropdowny u výpisků</li>
+					<li>Přidání popisků k výpiskům</li>
+					<li>Datum nahrání u výpisků</li>
+					<li>Přidání dark mode</li>
+					<li>Přidání modulu odevzdávárny</li>
+					<li>Nové ikony</li>
+					<li>Progress bar u nahrávání obrázků</li>
+					<li>Zvukové oznámení u Chatroom</li>
+					<li>Přidání zabezpečovacích mechanismů</li>
+					<li>Zpřehlednění kódu</li>
+					<li>Optimalizace modulu diáře</li>
+					<li>Aktualizace jQuery</li>
 				</ul>
 			</td>
 		</tr>

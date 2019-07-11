@@ -208,34 +208,25 @@ $wedevents = mysqli_query($link, "SELECT * FROM diar WHERE date='".$weddate."'")
 $thuevents = mysqli_query($link, "SELECT * FROM diar WHERE date='".$thudate."'");
 $frievents = mysqli_query($link, "SELECT * FROM diar WHERE date='".$fridate."'");
 ?>
-
 <!DOCTYPE html>
 <html lang="cs">
   <head>
 	<?php
 		include("parts/head.php");
-		echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
+		if (isset($_SESSION['design'])){
+			echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
+		}else{
+			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>";
+		}
 	?>
     <title>Úvod | Výpisky</title>
 	
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="assets/css/index.css" rel="stylesheet">
 	<link href="assets/css/main.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/notif.js"></script>
-	<script>
-	// Showing of othertype
-		function tothtype(){
-			if(document.getElementById('type')[document.getElementById('type').selectedIndex].value == 3){
-				document.getElementById('othtype').style.display = "block";
-            }else{
-				document.getElementById('othtype').style.display = "none";
-            }
-        }
-    </script>
   </head>
 
 	  <body class="x-body">
@@ -396,7 +387,7 @@ $frievents = mysqli_query($link, "SELECT * FROM diar WHERE date='".$fridate."'")
                                 <?php include 'parts/upsubj.php'; ?>
                             </select></p>
                         <p><label for="type">Typ</label> 
-                            <select class="form-control" name="type" id="type" onchange="tothtype()" required>
+                            <select class="form-control" name="type" id="type" required>
                                 <option value="0">Písemka</option>
                                 <option value="8">Úkol</option>
                                 <option value="1">Dopisování</option>
@@ -406,7 +397,19 @@ $frievents = mysqli_query($link, "SELECT * FROM diar WHERE date='".$fridate."'")
                                 <option value="6">Olympiáda</option>
                                 <option value="7">Exkurze</option>
                                 <option value="3">Jiné</option>
-                            </select> <input class="form-control" style="margin-top: 5px;display: none;" type="text" name="othtype" id="othtype" maxlength="20" /></p>
+                            </select> 
+							<script>
+								// Showing of othertype
+								document.getElementById('type').onchange = function() {tothtype()};
+								function tothtype(){
+									if(document.getElementById('type')[document.getElementById('type').selectedIndex].value == 3){
+										document.getElementById('othtype').style.display = "block";
+									}else{
+										document.getElementById('othtype').style.display = "none";
+									}
+								}
+							</script>
+							<input class="form-control" style="margin-top: 5px;display: none;" type="text" name="othtype" id="othtype" maxlength="20" /></p>
                         <p><label for="name">Téma</label> <input class="form-control" type="text" name="name" id="name" required maxlength="30" autocomplete="off" /></p>
                         <p><input class="btn btn-primary" type="submit" name="addevent" value="Přidat událost" /></p>
                     </form>

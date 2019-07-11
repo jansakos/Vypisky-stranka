@@ -8,12 +8,16 @@
     <?php
 		// Design setting
 		include("parts/head.php");
-		echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
+		if (isset($_SESSION['design'])){
+			echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
+		}else{
+			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>";
+		}
+		
 	?>
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 	<title>Nahrání | Výpisky</title>
   </head>
@@ -31,9 +35,14 @@
 			
 					<form action='up.php' method='post' enctype='multipart/form-data'>
 						<div class="form-group">
-							<div class="col-lg-6 col-lg-offset-4">
-								<input type='file' required class="btn btn-default" name='fileToUpload' id='fileToUpload'>
-							</div>
+							
+								<input type='file' required class="btn btn-default btn-block" name='fileToUpload' id='fileToUpload'>
+							
+						</div>
+						
+						<div class="form-group">
+							<label for="PopisForm">Popis:</label>
+							<input type="text" autocomplete="off" class="form-control" id="PopisForm" placeholder="Nepovinný stručný popis" name='popis'>
 						</div>
 							
 						<div class="form-row">
@@ -70,7 +79,12 @@
 					<form action='updress.php' method='post' enctype='multipart/form-data'>
 						<div class="form-group">
 							<label for="AdresaForm">Adresa URL:</label>
-							<input type="url" autocomplete="off" required class="form-control" id="AdresaForm" placeholder="Zadejte adresu (včetně http/https://)" name='adresa'>
+							<input type="url" autocomplete="off" required class="form-control" id="AdresaForm" placeholder="Zadejte celou adresu (např. https://duck.com)" name='adresa'>
+						</div>
+						
+						<div class="form-group">
+							<label for="PopisForm">Popis:</label>
+							<input type="text" autocomplete="off" class="form-control" id="PopisForm" placeholder="Nepovinný stručný popis" name='popis'>
 						</div>
 						
 						<div class="form-row">

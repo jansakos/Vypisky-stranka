@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1:3306
--- Vytvořeno: Ned 19. kvě 2019, 10:22
+-- Vytvořeno: Stř 10. čec 2019, 20:02
 -- Verze serveru: 5.7.21
 -- Verze PHP: 7.2.4
 
@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS `diar` (
   `othtype` varchar(20) DEFAULT NULL,
   `owner` varchar(6) NOT NULL DEFAULT 'jsamek',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

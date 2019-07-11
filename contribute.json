@@ -1,0 +1,14 @@
+{
+  "name": "Výpisky",
+  "description": "Webový systém pro studenty, určený primárně pro sdílení souborů.",
+  "repository": {
+    "url": "https://github.com/sakosco/Vypisky-stranka",
+    "license": "GPL-3.0"
+  },
+  "keywords": [
+    "Vypisky",
+    "OSSfS",
+    "OSS",
+	"Sakos"
+  ]
+}

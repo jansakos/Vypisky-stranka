@@ -21,7 +21,4 @@
       </div>
     </div>
 	
-	<noscript>
-	VAROVÁNÍ<br>
-	Používáme JavaScript a vypadá to tak, že ho váš prohlížeč nepodporuje. Doporučujeme změnit prohlížeč, např. na <a href="http://mozilla.org">Mozillu Firefox</a>.
-	</noscript>
+<noscript>VAROVÁNÍ<br>Používáme JavaScript a vypadá to tak, že ho váš prohlížeč nepodporuje. Doporučujeme změnit prohlížeč, např. na <a href="http://mozilla.org">Mozillu Firefox</a>.</noscript>

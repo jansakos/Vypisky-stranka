@@ -16,17 +16,9 @@
 <!DOCTYPE html>
 <html lang="cs">
   <head>
-    <meta charset="UTF-8">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Výpisky Jarošky">
-    <meta name="author" content="Jan Sako">
-	<meta name="theme-color" content="#2d2d2d">
-	<meta name="msapplication-navbutton-color" content="#2d2d2d">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="keywords" content="Jaroska, vypisky, vypisky Jarosky, Sakos, 4bg">
+    <?php
+		include('parts/head.php');
+	?>
 	<title>Nahrávám...</title>
   </head>
   
@@ -49,34 +41,41 @@
 				if(empty(trim($_POST['nameht']))){  
 					$uploadOk = 0;
 				}else{
-				$name = trim($_POST['nameht']);
+				$name = trim(stripslashes(htmlspecialchars($_POST['nameht'])));
 				}
 			
 				// Address confirm
 				if(empty(trim($_POST['adresa']))){  
 					$uploadOk = 0;
 				}else{
-				$address = trim($_POST['adresa']);
+				$address = trim(stripslashes(htmlspecialchars($_POST['adresa'])));
+				}
+			
+				// Description confirm
+				if(empty(trim($_POST['popis']))){ 		
+				}else{
+					$descript = trim(stripslashes(htmlspecialchars($_POST['popis'])));
 				}
 			
 				// Any error?
 				if ($uploadOk ==0){
 					echo "Pardon, Vaše adresa nesplňuje všechny podmínky. ";
-				} else {
+				}else{
 				
 				// Insert into MySQL
-					$sql = "INSERT INTO files (subject, name, address, author) VALUES (?, ?, ?, ?)";
+					$sql = "INSERT INTO files (subject, name, address, author, descript) VALUES (?, ?, ?, ?, ?)";
 					
 					if($stmt = mysqli_prepare($link, $sql)){
 						
 					// Bind variables to the prepared statement as parameters
-					mysqli_stmt_bind_param($stmt, "ssss", $param_subject, $param_name, $param_address, $param_author);
+					mysqli_stmt_bind_param($stmt, "sssss", $param_subject, $param_name, $param_address, $param_author, $param_descript);
 					
 					// Set parameters
 					$param_name = $name;
 					$param_subject = $subject;
 					$param_author = ($_SESSION['username']);
 					$param_address = $address;
+					$param_descript = $descript;
 					
 					// Attempt to execute the prepared statement
 					if(mysqli_stmt_execute($stmt)){

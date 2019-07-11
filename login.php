@@ -91,7 +91,7 @@
 	}
 
 	// Login design selection
-	$design = array('dark', 'default');
+	$design = array('dark', 'default', 'black');
 	if (isset($_GET['design']) && in_array($_GET['design'], $design)) {
 			$_COOKIE['design'] = $_GET['design'];
 	}
@@ -106,18 +106,17 @@
 		if(isset($_COOKIE["design"])){
 			 echo "<link href='assets/css/bootstrap-". $_COOKIE['design']. ".css' rel='stylesheet'>";
 			 // Extend it
-			 setcookie("design", $_COOKIE["design"], time()+60*60*24*30*6, "/");
+			 setcookie("design", $_COOKIE["design"], time()+60*60*24*30*6, "/", 1, 1);
 		}else{
 			// Set new cookie with default
-			 setcookie("design", "dark", time()+60*60*24*30*6, "/");
+			 setcookie("design", "default", time()+60*60*24*30*6, "/", 1, 1);
 			 echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>";
 		}
 		 
 	?>	
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 	<title>Přihlášení | Výpisky</title>
   </head>

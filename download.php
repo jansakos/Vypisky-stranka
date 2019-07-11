@@ -8,7 +8,7 @@
 	}		
 
 	// Ordering by
-	$orderedBy = array('subject', 'name', 'author', 'id');
+	$orderedBy = array('subject', 'name', 'author', 'id', 'subject desc', 'name desc', 'author desc', 'id desc');
 	$order = 'subject';
 	if (isset($_GET['orderedBy']) && in_array($_GET['orderedBy'], $orderedBy)) {
 		$order = $_GET['orderedBy'];
@@ -25,14 +25,17 @@
 	<?php
 		// Set design
 		include("parts/head.php");
-		echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
+		if (isset($_SESSION['design'])){
+			echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
+		}else{
+			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>";
+		}
 	?>
 	<title>Ke stažení | Výpisky</title>
 	
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
   </head>
 
@@ -52,16 +55,31 @@
 				echo "<div class='container'>
 						<div class='form-group col-md-2'>
 							<label for='Order'>Seřadit dle:</label>
-							<select id='Order' name='OrderBy' class='form-control' onchange='location = this.value;'>
-								<option default value='?orderedBy=subject'>Předmětu</option>
-								<option value='?orderedBy=id'>Stáří</option>
-								<option value='?orderedBy=name'>Názvu</option>
-								<option value='?orderedBy=author'>Autora</option>
+							<select id='Order' name='OrderBy' class='form-control'>
+								<option default value='?orderedBy=subject'>Předmětu &#9661;</option>
+								<option value='?orderedBy=id'>Stáří &#9661;</option>
+								<option value='?orderedBy=name'>Názvu &#9661;</option>
+								<option value='?orderedBy=author'>Autora &#9661;</option>
+								<option value='?orderedBy=subject desc'>Předmětu &#9651;</option>
+								<option value='?orderedBy=id desc'>Stáří &#9651;</option>
+								<option value='?orderedBy=name desc'>Názvu &#9651;</option>
+								<option value='?orderedBy=author desc'>Autora &#9651;</option>
 							</select>
 						</div>
 					</div>";
 			}
 		?>
+		<script>
+		 $(function(){
+			  $('#Order').on('change', function () {
+				  var url = $(this).val();
+				  if (url) {
+					  window.location = url;
+				  }
+				  return false;
+			  });
+			});
+		</script>
 		<br>
 		<div class="container-w">
 			<div class="table-responsive">
@@ -80,21 +98,26 @@
 										  </tr>
 									</thead>";
 								while ($row = mysqli_fetch_array($query)){
+								
+									$datestr = strtotime($row['date']);
+									$findate = date('d. m. Y H:i:s', $datestr);
+									
 									echo "<tr data-toggle='collapse' data-target='.order".$row['id']."'>
 											<td>".$row['subject']."</td>
 											<td>".$row['name']."</td>";	
 									if(file_exists($row['address'])){
-										echo "<td><a href='down.php?file=".$row['address']."' target='_blank'><i class='fa fa-download'></i></a>";
+										echo "<td><a href='file.php?action=down&file=".$root.$row['address']."' target='_blank'><i class='fa fa-download'></i></a>";
 									}else{
 										echo "<td><a href='".$row['address']."' target='_blank'><i class='fa fa-download'></i></a></td>";
 									}
 									echo "</tr>
 									<tr class='collapse order".$row['id']."'>
 									  <td colspan='3'><b>Autor:</b> ".$row['author']."<br>
+									  <b>Nahráno:</b> ".$findate."<br>
 									  <b>Popis:</b> ".$row['descript']."<br>
-									  <a href='delete.php?address=".$row['address']."&id=".$row['id']."' class='btn btn-default'>Smazat</a>";
+									  <a href='file.php?action=del&id=".$row['id']."' class='btn btn-default'>Smazat</a>  <a href='file.php?action=arch&id=".$row['id']."' class='btn btn-default'>Archivovat</a>  ";
 										if(file_exists($row['address'])){
-											echo "<a href='down.php?file=".$row['address']."' target='_blank' class='btn btn-default'>Stáhnout</a><a href='".$row['address']."' target='_blank' class='btn btn-default'>Otevřít</a>";
+											echo "<a href='file.php?action=down&file=".$row['address']."' target='_blank' class='btn btn-default'>Stáhnout</a>  <a href='".$row['address']."' target='_blank' class='btn btn-default'>Otevřít</a>";
 										}else{
 											echo "<a href='".$row['address']."' target='_blank' class='btn btn-default'>Navštívit</a>";
 										}
@@ -113,30 +136,34 @@
 										  </tr>
 									</thead>";
 								while ($row = mysqli_fetch_array($query)){
+									
+									$datestr = strtotime($row['date']);
+									$findate = date('d. m. Y H:i:s', $datestr);
+									
 									echo "<tr data-toggle='collapse' data-target='.order".$row['id']."'>
 											<td>".$row['subject']."</td>
 											<td>".$row['name']."</td>";	
 									if(file_exists($row['address'])){
-										echo "<td><a href='down.php?file=".$row['address']."' target='_blank'><i class='fa fa-download'></i></a>";
+										echo "<td><a href='file.php?action=down&file=".$root.$row['address']."' target='_blank'><i class='fa fa-download'></i></a>";
 									}else{
 										echo "<td><a href='".$row['address']."' target='_blank'><i class='fa fa-download'></i></a></td>";
 									}
 									echo "</tr>
 									<tr class='collapse order".$row['id']."'>
 									  <td colspan='3'><b>Autor:</b> ".$row['author']."<br>
-									  <b>Popis:</b> ".$row['descript']."
-									  </td>
+									  <b>Nahráno:</b> ".$findate."<br>
+									  <b>Popis:</b> ".$row['descript']."<br>";
+									
+									if (($row['author'])==($_SESSION['username']))
+									  echo "<a href='file.php?action=arch&id=".$row['id']."' class='btn btn-default'>Archivovat</a>";
+									  if(file_exists($row['address'])){
+											echo "<a href='file.php?action=down&file=".$root.$row['address']."' target='_blank' class='btn btn-default'>Stáhnout</a> <a href='".$root.$row['address']."' target='_blank' class='btn btn-default'>Otevřít</a>";
+										}else{
+											echo " <a href='".$row['address']."' target='_blank' class='btn btn-default'>Navštívit</a>";
+										}
+									  echo "</td>
 									</tr>";
 									}	
-											
-									// Delete my record
-									/*if(($_SESSION['username'])==$row['author']){
-										echo "<td><a href='delete.php?address=".$row['address']."&id=".$row['id']."'><i class='fa fa-trash-o'></i></a></td>";
-									}else{
-										echo "<td><i class='fa fa-times'></i></td>";
-									}
-									echo '</tr>';
-								}*/
 							}else{
 								
 							// View for everybody
@@ -148,19 +175,29 @@
 										  </tr>
 									</thead>";
 								while ($row = mysqli_fetch_array($query)){
+									
+									$datestr = strtotime($row['date']);
+									$findate = date('d. m. Y H:i:s', $datestr);
+									
 									echo "<tr data-toggle='collapse' data-target='.order".$row['id']."'>
 											<td>".$row['subject']."</td>
 											<td>".$row['name']."</td>";	
 									if(file_exists($row['address'])){
-										echo "<td><a href='down.php?file=".$row['address']."' target='_blank'><i class='fa fa-download'></i></a>";
+										echo "<td><a href='file.php?action=down&file=".$root.$row['address']."' target='_blank'><i class='fa fa-download'></i></a>";
 									}else{
 										echo "<td><a href='".$row['address']."' target='_blank'><i class='fa fa-download'></i></a></td>";
 									}
 									echo "</tr>
 									<tr class='collapse order".$row['id']."'>
 									  <td colspan='3'><b>Autor:</b> ".$row['author']."<br>
-									  <b>Popis:</b> ".$row['descript']."
-									  </td>
+									  <b>Nahráno:</b> ".$findate."<br>
+									  <b>Popis:</b> ".$row['descript']."<br>";
+									  if(file_exists($row['address'])){
+											echo "<a href='file.php?action=down&file=".$root.$row['address']."' target='_blank' class='btn btn-default'>Stáhnout</a> <a href='".$root.$row['address']."' target='_blank' class='btn btn-default'>Otevřít</a>";
+										}else{
+											echo " <a href='".$row['address']."' target='_blank' class='btn btn-default'>Navštívit</a>";
+										}
+									  echo "</td>
 									</tr>";
 								}
 							}
@@ -187,7 +224,7 @@
 				<div class="centered">
 					<div class="col-lg-8 col-md-offset-2">
 						<h4>POUZE AKTIVNÍ</h4>
-						<p>Na této stránce se nachází pouze aktuální výpisky. Pokud nemůžete Vámi hledané výpisky najít zde, jděte na <a href="http://archiv-vypisky.chytrak.cz">Archiv Výpisků Jarošky</a>. Zde se nachází všechny starší výpisky. Pokud zde Váš soubor chybí, dejte nám vědět a my se pokusíme jej zde nahrát.</p>
+						<p>Na této stránce se nachází pouze aktuální výpisky. Pokud nemůžete Vámi hledané výpisky najít zde, přejděte do sekce Archiv. Zde se nachází všechny starší výpisky. Pokud zde Váš soubor chybí, dejte nám vědět a my se pokusíme jej zde nahrát.</p>
 					</div>
 				</div>
 			</div>

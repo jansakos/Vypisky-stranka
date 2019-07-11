@@ -135,7 +135,7 @@
 		$fileName = round(microtime(true)) . mt_rand() . '.' . $fileExtention;
 		
 		// Set folder
-		$path = $root . "obrazky/" . $fileName;
+		$path = $root . "assets/files/obrazky/" . $fileName;
 		
 		// Destination on server
 		$destination = $_SERVER['DOCUMENT_ROOT'] . $path;
@@ -145,7 +145,7 @@
 			throw new Exception('Nastala chyba při přesouvání souboru.');
 		
 		// Miniature making
-		$target_dir = $_SERVER['DOCUMENT_ROOT'] . $root . "obrazky/";
+		$target_dir = $_SERVER['DOCUMENT_ROOT'] . $root . "assets/files/obrazky/";
 		$target_file = $target_dir . $fileName . '.min';
 
 		$image = new SimpleImage();
@@ -221,7 +221,7 @@
 					//Message is image
 					if (($message->type)== "2"){
 					$chat .= '<div class="single-picture '.(($_SESSION['username']==$message->user)?'right':'left').'">
-					<strong>'.$message->user.':</strong> <span>'.date('G:i', strtotime($message->date)).'</span>'.(($_SESSION['permission']=="o")?"<a href='messages.php?action=delMessage&id=".$message->id."'<i class='fa fa-trash-o'></i></a>":"").'<br> <a href="assets/files/obrazky/'.$message->message.'"  target="_blank"><img src="assets/files/obrazky/'.$message->message.'.min" alt="Obrázek se nepovedlo načíst"></a>
+					<strong>'.$message->user.':</strong> <span>'.date('G:i', strtotime($message->date)).'</span>'.(($_SESSION['permission']=="o")?"<a href='messages.php?action=delMessage&id=".$message->id."'<i class='fa fa-trash-o'></i></a>":"").'<br> <a href="'.$root.'assets/files/obrazky/'.$message->message.'"  target="_blank"><img src="'.$root.'assets/files/obrazky/'.$message->message.'.min" alt="Obrázek se nepovedlo načíst"></a>
 								</div><div class="clear"></div>';
 					}
 					
@@ -245,8 +245,8 @@
 					// Deleting images
 					foreach( $rs as $message ){
 						if (($message->type) == "2"){
-							unlink ("assets/files/obrazky/".($message->message));
-							unlink ("assets/files/obrazky/".($message->message).'.min');
+							unlink ($_SERVER['DOCUMENT_ROOT'].$root."assets/files/obrazky/".($message->message));
+							unlink ($_SERVER['DOCUMENT_ROOT'].$root."assets/files/obrazky/".($message->message).'.min');
 						}
 					}
 					

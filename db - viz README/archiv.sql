@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1:3306
--- Vytvořeno: Stř 10. čec 2019, 20:03
+-- Vytvořeno: Stř 10. čec 2019, 20:00
 -- Verze serveru: 5.7.21
 -- Verze PHP: 7.2.4
 
@@ -25,21 +25,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `files`
+-- Struktura tabulky `archiv`
 --
 
-DROP TABLE IF EXISTS `files`;
-CREATE TABLE IF NOT EXISTS `files` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id souboru',
-  `subject` tinytext NOT NULL COMMENT 'Školní předmět',
-  `name` varchar(50) NOT NULL COMMENT 'Název souboru',
-  `address` varchar(150) NOT NULL COMMENT 'Adresa umístění',
-  `author` varchar(6) NOT NULL COMMENT 'Username autora',
-  `descript` varchar(100) NOT NULL DEFAULT 'Autor nedodal popis.',
+DROP TABLE IF EXISTS `archiv`;
+CREATE TABLE IF NOT EXISTS `archiv` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject` tinytext NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `address` varchar(150) NOT NULL,
+  `author` varchar(6) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `archdate` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
