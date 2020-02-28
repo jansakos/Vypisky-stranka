@@ -17,7 +17,7 @@ Součástí tohoto projektu je i jednoduchá chatroom s podporou odkazů a obrá
 4) V souboru "config.php" nastavte složku s obrázky z Chatroom
 
 # Oprávnění uživatelů
-- "o" (=owner) - plný přístup, možnost mazat výpisky, události, přidávat soubory o veikosti až 10 MB
+- "o" (=owner) - plný přístup, možnost mazat výpisky, události, přidávat soubory o velikosti až 10 MB
 - "w" (=writer) - možnost přidávat události a nahrávat výpisky o velikosti až 2 MB
 - "u" (=untrusted writer) - totožné, jako "writer", jen velikost výpisků je max. 250 kB
 - "r" (=reader) - uživatel, který nesmí výpisky nahrávat, pouze stahovat
@@ -25,3 +25,5 @@ Součástí tohoto projektu je i jednoduchá chatroom s podporou odkazů a obrá
 - "p" (=paused) - pozastavený účet, bez možnosti přihlášení
 
 > Vyvíjeno ve spolupráci s @github/vojta478
+
+# Projekt bude v budoucnu nahrazen projektem Open School System for Students.
