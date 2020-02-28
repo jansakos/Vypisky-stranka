@@ -5,9 +5,10 @@
 		header("location: login.php");
 		exit;
 	}
+	require_once 'config.php';
 	
 	// Veritification of user
-	if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSION['permission'])!="u"){
+	if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSION['permission'])!="u" && ($_SESSION['permission'])!="t"){
 		header("location: download.php");
 		exit;
 	}
@@ -24,7 +25,6 @@
   
   <body>
 	<?php
-		include('config.php');
 	
 		// Set directory
 		$slozka = 'assets/files/vypisky/';
@@ -40,12 +40,15 @@
 				if(($_SESSION['permission'])=="u") {
 					$maxsize = 250000;
 				}else{
+					if(($_SESSION['permission'])=="t") {
+						$maxsize = 10000000;
+					}else{
 					
-					// Strange error
-					header("location: download.php");
+						// Strange error
+						header("location: download.php");
+					}
 				}
-			}
-			
+			}	
 		}
 		
 
@@ -132,12 +135,28 @@
 						
 						// Attempt to execute the prepared statement
 						if(mysqli_stmt_execute($stmt)){
-							// Redirect to download page
-							header("location: download.php");
-						}else{
-							echo "Neočekávaná chyba.";
+							$sql = "INSERT INTO rss (title, description) VALUES (?, ?)";
+					
+							if($stmt = mysqli_prepare($link, $sql)){
+								
+								// Bind variables to the prepared statement as parameters
+								mysqli_stmt_bind_param($stmt, "ss", $param_title, $param_description);
+								
+								// Set parameters
+								$param_title = 'Nový soubor!';
+								$param_description = 'Uživatel '.$_SESSION['username'].' nahrál soubor '.$name.' v předmětu '.$subject.'.';
+								
+								// Attempt to execute the prepared statement
+								if(mysqli_stmt_execute($stmt)){
+									// Redirect to download page
+									header("location: download.php");
+								}else{
+									echo "Neočekávaná chyba.";
+								}
+							}else{
+								echo "Neočekávaná chyba.";
+							}
 						}
-					}
 				 
 					// Close statement
 					mysqli_stmt_close($stmt);
@@ -156,7 +175,8 @@
 						echo": Soubor není zapisovatelný.<br />";
 					}
 				}    
-		}	
+			}
+		}
 	?>
   </body>
 </html>

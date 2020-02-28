@@ -1,4 +1,6 @@
 <?php
+	require_once 'config.php';
+	
 	// Veritification of logging
 	session_start();
 	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
@@ -95,7 +97,6 @@
 	   }      
 
 	}
-		include("config.php");
 	 
 	// Sending image
 	if (isset($_FILES) && !empty($_FILES)) {
@@ -188,7 +189,7 @@
 				if( $run ){
 					echo 1;
 					exit;
-				};
+				}
 			break;
 			
 			// Message getting
@@ -204,11 +205,14 @@
 				$chat="";
 				$date="";
 				
+				$monen = [ 1 => 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+				$moncz = [ 1 => 'led.', 'úno.', 'bře.', 'dub.', 'kvě.', 'čvn.', 'čvc.', 'srp.', 'zář.', 'říj.', 'lis.', 'pro.'];
+				
 				foreach( $rs as $message ){
 					if ($date == date('d.m.Y', strtotime($message->date))){
 					}else{
 						$date=date('d.m.Y', strtotime($message->date));
-						$chat .= '<div class="strike"><span>'.date('d. M', strtotime($message->date)).'</span></div>';
+						$chat .= '<div class="strike"><span>'.str_replace($monen, $moncz, date('d. M', strtotime($message->date))).'</span></div>';
 					}
 					
 					//Message is text

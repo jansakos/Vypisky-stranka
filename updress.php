@@ -5,9 +5,10 @@
 		header("location: login.php");
 		exit;
 	}
+	require_once 'config.php';
 
 	// User veritifacition
-	if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSION['permission'])!="u"){
+	if(($_SESSION['permission'])!="o" && ($_SESSION['permission'])!="w" && ($_SESSION['permission'])!="u" && ($_SESSION['permission'])!="t"){
 		header("location: download.php");
 		exit;
 	}
@@ -26,7 +27,6 @@
 		<?php
 			$uploadOk = 1;
 			$author = $name = $subject = $address = "";
-			require_once 'config.php';
 			
 			if($_SERVER["REQUEST_METHOD"] == "POST"){
 					
@@ -79,16 +79,33 @@
 					
 					// Attempt to execute the prepared statement
 					if(mysqli_stmt_execute($stmt)){
-						// Redirect to download page
-						header("location: download.php");
+							$sql = "INSERT INTO rss (title, description) VALUES (?, ?)";
+					
+							if($stmt = mysqli_prepare($link, $sql)){
+								
+								// Bind variables to the prepared statement as parameters
+								mysqli_stmt_bind_param($stmt, "ss", $param_title, $param_description);
+								
+								// Set parameters
+								$param_title = 'Nový odkaz!';
+								$param_description = 'Uživatel '.$_SESSION['username'].' nahrál odkaz na '.$name.' v předmětu '.$subject.'.';
+								
+								// Attempt to execute the prepared statement
+								if(mysqli_stmt_execute($stmt)){
+									// Redirect to download page
+									header("location: download.php");
+								}else{
+									echo "Neočekávaná chyba.";
+								}
+							}
 					} else{
 						echo "Neočekávaná chyba.";
 					}
-				}
+				
 				 
 				// Close statement
 				mysqli_stmt_close($stmt);
-		   
+				}
 			
 			// Close connection
 			mysqli_close($link);

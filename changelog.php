@@ -2,6 +2,7 @@
 <html lang="cs">
   <head>
     <?php
+		require_once 'config.php';
 		include("parts/head.php");
 	?>
 	<title>Changelog | Výpisky</title>
@@ -228,8 +229,8 @@
 				<ul>
 					<li>Přidání možnosti stažení</li>
 					<li>Pokročilá správa stránky skrze web</li>
-					<li>Přidání moderátorů</li>
-					<li>Vylepšení sw</li>
+					<li><i>Přidání moderátorů</i></li>
+					<li><i>Vylepšení sw</i></li>
 					<li>Nové ikony</i>
 					<li>Lehké optimalizace</li>
 				</ul>
@@ -237,24 +238,33 @@
 		</tr>
 		<tr>
 			<td><p><b>0.9 (Archive update)</b></p></td>
-			<td><p><i>???</i></p></td>
+			<td><p>20.11.2019</p></td>
 			<td>
 				<ul>
 					<li>Archiv součástí hlavní stránky</li>
-					<li>Automatická archivace výpisků</li>
 					<li>Redesign download sekce</li>
 					<li>Dropdowny u výpisků</li>
 					<li>Přidání popisků k výpiskům</li>
 					<li>Datum nahrání u výpisků</li>
 					<li>Přidání dark mode</li>
-					<li>Přidání modulu odevzdávárny</li>
 					<li>Nové ikony</li>
-					<li>Progress bar u nahrávání obrázků</li>
 					<li>Zvukové oznámení u Chatroom</li>
 					<li>Přidání zabezpečovacích mechanismů</li>
+					<li>Přidání učitelských účtů</li>
+					<li>Přidání RSS</li>
 					<li>Zpřehlednění kódu</li>
 					<li>Optimalizace modulu diáře</li>
+					<li>Větší kontrast diáře</li>
 					<li>Aktualizace jQuery</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><p><b>0.10 (Last major update)</b></p></td>
+			<td><p><i>?.?.2020</i></p></td>
+			<td>
+				<ul>
+
 				</ul>
 			</td>
 		</tr>

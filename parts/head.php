@@ -1,7 +1,6 @@
 	<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com 'unsafe-inline'; 
 	img-src *; 
-	script-src https://oss.maxcdn.com/ 'sha256-v3rdUJ051CGUaUlPRYUpJWV8XSxaCztNbpneiIt5MaQ=' 'sha256-MzsJS25gtgjzaQJ9epEq6CUD0DxT/ZWin0fiGnT25w8=' 'sha256-2jNptEFL4D8wEVpcBcgbnTCWBSLFq04jZ7r8BqK4Qtw=' 'sha256-z2OA/UfMwTWkxzqIH0NwrujlVX1qel9Koer1BHujoBw=' 'sha256-cMfpe2CMvL9p52zgEa1SPCAX2miB7XB+u3xzfV+2LIA=' 'sha256-6QlcxsF43+6Q03JMaGSfH1kzkGrH6TQ2z75aDDvbWzw=' 'sha256-KFg3ZHhSUKF9CWEKMZHWYBvDU9rlgByRrCuqbnBTq8o='
-	'sha256-fZ0GmSuv1fvJfXpJcj9QgumOThy/+tONef3tLSwXiZ4=' 'sha256-EJQ4DF/t6taagnA04EJPfHppGjWAsaTUThXB/P5bZU4=' 'self' 'unsafe-inline';
+	script-src https://oss.maxcdn.com/  'self' 'sha256-rGI7kIEt01fJWy6GhnN9OLc2ltBmBFZPszVxkO/qqlI=' 'sha256-cMfpe2CMvL9p52zgEa1SPCAX2miB7XB+u3xzfV+2LIA=' 'sha256-EJQ4DF/t6taagnA04EJPfHppGjWAsaTUThXB/P5bZU4=' 'sha256-6jyBQ7jNjfTNWYwqaP3Zj95ilNzAQY8L6y6t0VbC26M=' 'sha256-2jNptEFL4D8wEVpcBcgbnTCWBSLFq04jZ7r8BqK4Qtw=' 'sha256-f7hh68d5vOfdo8M8+l9NpiVfzeNliDaiJD5bhu5G+Ms=';
 	object-src 'none';
 	font-src https://fonts.googleapis.com https://fonts.gstatic.com/ 'self' data:">	
 	<meta charset="UTF-8">
@@ -28,6 +27,7 @@
 	<link rel="manifest" href="assets/manifest/site.webmanifest?v=lk9El2XkA0">
 	<link rel="mask-icon" href="assets/ico/safari-pinned-tab.svg?v=lk9El2XkA0" color="#5bbad5">
 	<link rel="shortcut icon" href="assets/ico/favicon.ico?v=lk9El2XkA0">
+	<link rel="alternate" type="application/rss+xml" title="RSS Výpisků" href="<?=$domainname ?>/test/rss/index.php" />
 
 	<?php
 		header("X-XSS-Protection: 1; mode=block");

@@ -1,6 +1,6 @@
 <?php
 	// User logged in
-	include ('config.php');
+	require_once 'config.php';
 	session_start();
 	$user = $_SESSION['username'];
 	if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
@@ -136,31 +136,8 @@
 	// Add notification
 	$exp = $text = $type = $for = "";
 	if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['exp']) && !empty($_POST['text']) && !empty($_POST['type'])){
- 
-        // Prepare a select statement
-        $sql = "SELECT id FROM notif WHERE text = ?";
-        
-        if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_text);
-            
-            // Set parameters
-            $param_text = trim($_POST['text']);
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
-                /* store result */
-                mysqli_stmt_store_result($stmt);
-                
-                if(mysqli_stmt_num_rows($stmt) == 1){
-                   echo "Již řečená zpráva!";
-                } else{
-                    $text = stripslashes(htmlspecialchars($_POST['text']));
-                }
-            } else{
-                echo "Něco se pokazilo.";
-            }
-        }
+		
+		$text = stripslashes(htmlspecialchars($_POST['text']));
          
         // Close statement
         mysqli_stmt_close($stmt);
@@ -171,6 +148,25 @@
 		
 		if(!empty($_POST['forwhom'])){
 			$for = trim($_POST['forwhom']);
+		}else{
+			$sql = "INSERT INTO rss (title, description) VALUES (?, ?)";
+					
+			if($stmt = mysqli_prepare($link, $sql)){
+						
+				// Bind variables to the prepared statement as parameters
+				mysqli_stmt_bind_param($stmt, "ss", $param_title, $param_description);
+									
+				// Set parameters
+				$param_title = 'Nové upozornění!';
+				$param_description = 'Uživatel '.$_SESSION['username'].' oznamuje všem: '.$text.'.';
+									
+				// Attempt to execute the prepared statement
+				if(mysqli_stmt_execute($stmt)){
+					header("location: adminset.php");
+				}else{
+					echo "Neočekávaná chyba.";
+				}
+			}
 		}
         
         // Prepare an insert statement
@@ -215,13 +211,14 @@
 	<?php
 		include("parts/head.php");
 		if (isset($_SESSION['design'])){
-			echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
+			echo "<link href='assets/css/bootstrap-".$_SESSION['design'].".css' rel='stylesheet'>
+			<link href='assets/css/main-".$_SESSION['design'].".css' rel='stylesheet'>";
 		}else{
-			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>";
+			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>
+			<link href='assets/css/main-default.css' rel='stylesheet'>";
 		}
 	?>
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/main.css" rel="stylesheet">
 	<script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 	<title>Nastavení stránky | Výpisky</title>
@@ -284,6 +281,7 @@
 							<option value="w">Pisatel</option>
 							<option value="u">Neověřený pisatel</option>
 							<option value="n">Spammer</option>
+							<option value="t">Učitel</option>
 							<option value="p">Pozastaven</option>
 						</select> 
 						<span class="help-block"><?php echo $permission_err; ?></span>

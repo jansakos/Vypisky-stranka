@@ -1,0 +1,193 @@
+.diar{
+    margin: 0 auto;
+    max-width: fit-content;
+    max-width: -moz-fit-content;
+    line-height: unset;
+}
+.dbody{
+    float: left;
+}
+.dframe{
+    margin: 0 auto;
+	width: 100%;
+    position: relative;
+}
+.dframe a{
+    text-decoration: none;
+    color: lightseagreen;
+    position: absolute;
+    top: 0;
+}
+.dframe .leftarrow{
+    color: #f85c37;
+    left: 0;
+}
+.dframe .rightarrow{
+    color: #f85c37;
+    right: 0;
+}
+.dbody .legend{
+    margin: 4px 12px;
+    width: fit-content;
+    width: -moz-fit-content;
+}
+.dbody .legend *{
+    display: inline-block;
+    margin: 2px 0;
+}
+.dbody .legend legend{
+    font-size: 17px;
+}
+.dbody .legend div p{
+    padding: 2px 5px;
+    margin: 0;
+}
+.addevent{
+    float: left;
+    margin: 30px 20px;
+    width: max-content;
+    width: -moz-max-content;
+}
+.dtable{
+    margin: 5px 20px;
+    width: 505px;
+    min-height: 300px;
+    position: relative;
+    font-size: 0;
+}
+.dtable .day{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+    border-left: 1px solid white;
+}
+.dtheader{
+    background: #2d2d2d;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    width: 100px;
+}
+.dtable .day .event{
+    padding: 10px 5px;
+    min-width: 90px;
+    position: relative;
+    overflow: hidden;
+}
+.dtheader, .event{
+    border-bottom: 1px solid white;
+}
+.event .remove{
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: #2d2d2d;
+}
+.dtheader p{
+    margin: 2px 5px;
+    /*display: inline-block;*/
+}
+.event p{
+    margin: 0;
+    width: 90px;
+    text-align: center;
+}
+.event .name{
+    line-height: 1.2;
+}
+.event0{
+    background-color: #b4d8e7;
+}
+.event1{
+    background-color: #b0e57c;
+}
+.event2{
+    background-color: #d6e681;
+}
+.event3{
+    background-color: #cfcfc0;
+}
+/*.event4{
+    background-color: #ffad36;
+}
+.event5{
+    background-color: lightgrey;
+}*/
+.event6{
+    background-color: #efbc9b;
+}
+.event7{
+    background-color: #fff0aa;
+}
+.event8{
+    background-color: #f2bac9;
+}
+.diarmsg{
+    width: 505px;
+    text-align: center;
+    margin: 2px auto;
+    border-left: 1px solid white;
+}
+@media all and (max-width: 768px){
+    .addevent{
+        float: none;
+        margin: 10px auto;
+    }
+	.diar{
+        float: none;
+        width: fit-content;
+        width: -moz-fit-content;
+        max-width: 100%;
+        margin: 5px auto;
+    }
+    .dbody{
+        float: none;
+        max-width: 100%;
+		width: 500px;
+    }
+    .dframe a{
+        width: 15px;
+        bottom: 0;
+    }
+    .dframe a i{
+        width: 100%;
+        position: relative;
+        top: 45%;
+    }
+    .dtable{
+        position: static;
+        width: auto;
+        max-width: 600px;
+        height: auto;
+        min-height: 0;
+    }
+    .dtable .day{
+        display: block;
+        position: static;
+        border: 0;
+    }
+    .dtheader{
+        width: 100%;
+        border-top: white solid 1px;
+		min-width: 90px;
+    }
+    .event{
+        padding: 10px 5px;
+        min-width: 90px;
+        text-align: center;
+    }
+    .dtheader p{
+        margin: 0 5px;
+    }
+    .event div p{
+        display: inline-block;
+        width: auto;
+        margin: 0 5px;
+    }
+    .diarmsg{
+        width: auto;
+        max-width: 600px;
+        text-align: center;
+        margin: 0 20px;
+    }
+}

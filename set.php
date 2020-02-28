@@ -11,11 +11,12 @@
 		header("location: adminset.php");
 		exit;
 	}
+	
+	require_once 'config.php';
 
 	// Vars empty setting 
 	$passold_err = $passnew_err = $passcon_err = '';
 	$user = $_SESSION['username'];
-	include ('config.php');
 
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		
@@ -92,13 +93,14 @@
 	<?php
 		include("parts/head.php");
 	 	if (isset($_SESSION['design'])){
-			echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
+			echo "<link href='assets/css/bootstrap-".$_SESSION['design'].".css' rel='stylesheet'>
+			<link href='assets/css/main-".$_SESSION['design'].".css' rel='stylesheet'>";
 		}else{
-			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>";
+			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>
+			<link href='assets/css/main-default.css' rel='stylesheet'>";
 		}
 	?>
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/main.css" rel="stylesheet">
 	<script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 	<title>Nastavení | Výpisky</title>

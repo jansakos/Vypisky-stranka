@@ -7,16 +7,18 @@
   <head>
     <?php
 		// Design setting
+		require_once 'config.php';
 		include("parts/head.php");
 		if (isset($_SESSION['design'])){
-			echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
+			echo "<link href='assets/css/bootstrap-".$_SESSION['design'].".css' rel='stylesheet'>
+			<link href='assets/css/main-".$_SESSION['design'].".css' rel='stylesheet'>";
 		}else{
-			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>";
+			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>
+			<link href='assets/css/main-default.css' rel='stylesheet'>";
 		}
 		
 	?>
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/main.css" rel="stylesheet">
 	<script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 	<title>Nahrání | Výpisky</title>
@@ -39,11 +41,6 @@
 								<input type='file' required class="btn btn-default btn-block" name='fileToUpload' id='fileToUpload'>
 							
 						</div>
-						
-						<div class="form-group">
-							<label for="PopisForm">Popis:</label>
-							<input type="text" autocomplete="off" class="form-control" id="PopisForm" placeholder="Nepovinný stručný popis" name='popis'>
-						</div>
 							
 						<div class="form-row">
 							<div class="form-group col-md-6">
@@ -52,7 +49,7 @@
 								<span class="help-block"></span>
 							</div>
 					
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-3">
 								<label for="PredmetForm">Předmět:</label>
 								<select id="PredmetForm" class="form-control" name="subject">
 									<?php
@@ -60,10 +57,26 @@
 									?>
 								</select>
 							</div>
+							<div class="form-group col-md-3">
+								<label for="LicenceForm">Licence:</label>
+								<select id="LicenceForm" class="form-control" name="licence">
+									<?php
+										include("parts/licence.php");
+									?>
+								</select>
+							</div>
 						</div>
-						<div class="form-group col-md-1">
-							<label><br></label>
-							<input type='submit' class="btn btn-primary" value='Nahrát soubor' name='submit'>
+						
+						<div class="form-row">
+							<div class="form-group col-md-10">
+								<label for="PopisForm">Popis:</label>
+								<input type="text" autocomplete="off" class="form-control" id="PopisForm" placeholder="Nepovinný stručný popis (max. 100 znaků)" name='popis' maxlength="100">
+							</div>
+							
+							<div class="form-group col-md-1">
+								<label><br></label>
+								<input type='submit' class="btn btn-primary" value='Nahrát soubor' name='submit'>
+							</div>
 						</div>
 					</form>
 						
@@ -82,11 +95,6 @@
 							<input type="url" autocomplete="off" required class="form-control" id="AdresaForm" placeholder="Zadejte celou adresu (např. https://duck.com)" name='adresa'>
 						</div>
 						
-						<div class="form-group">
-							<label for="PopisForm">Popis:</label>
-							<input type="text" autocomplete="off" class="form-control" id="PopisForm" placeholder="Nepovinný stručný popis" name='popis'>
-						</div>
-						
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="NazevHT">Název:</label>
@@ -94,14 +102,30 @@
 								<span class="help-block"></span>
 							</div>
 							
-							<div class="form-group col-md-4">
-								<label for="PredmetHT">Předmět:</label>
-								<select id="PredmetHT" class="form-control" name="subject">
+							<div class="form-group col-md-3">
+								<label for="PredmetForm">Předmět:</label>
+								<select id="PredmetForm" class="form-control" name="subject">
 									<?php
 										include("parts/upsubj.php");
 									?>
 								</select>
 							</div>
+							<div class="form-group col-md-3">
+								<label for="LicenceForm">Licence:</label>
+								<select id="LicenceForm" class="form-control" name="licence">
+									<?php
+										include("parts/licence.php");
+									?>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-row">
+							<div class="form-group col-md-10">
+								<label for="PopisForm">Popis:</label>
+								<input type="text" autocomplete="off" class="form-control" id="PopisForm" placeholder="Nepovinný stručný popis (max. 100 znaků)" name='popis' maxlength="100">
+							</div>
+							
 							<div class="form-group col-md-1">
 								<label><br></label>
 								<input type='submit' class="btn btn-primary" value='Nahrát odkaz' name='submit'>
@@ -122,7 +146,7 @@
 						<p>Vzhedem k současným implementacím jazyka a dalším bezpečnostním opatřením nesmí velikost souboru přesáhnout 
 						<?php 
 							// Maximum size
-							if(($_SESSION['permission'])=="o") {
+							if(($_SESSION['permission'])==("o" || "t")) {
 								echo "10&thinsp;MB.";
 							}
 							if(($_SESSION['permission'])=="w") {

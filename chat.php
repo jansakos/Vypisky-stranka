@@ -6,11 +6,13 @@
 		exit;
 	}
 	
-	// User not spammer
-	if(($_SESSION['permission']) == "n"){
+	// User not spammer nor teacher
+	if(($_SESSION['permission']) == "n" || ($_SESSION['permission']) == "t"){
 		header("location: index.php");
 		exit;
 	}
+	
+	require_once 'config.php';
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -20,16 +22,17 @@
 		include("parts/head.php");
 		if (isset($_SESSION['design'])){
 			echo "<link href='assets/css/bootstrap-". $_SESSION['design']. ".css' rel='stylesheet'>";
-			echo "<link href='assets/css/chat-". $_SESSION['design']. ".css' rel='stylesheet'>";
+			echo "<link href='assets/css/chat-". $_SESSION['design']. ".css' rel='stylesheet'>
+			<link href='assets/css/main-".$_SESSION['design'].".css' rel='stylesheet'>";
 		}else{
 			echo "<link href='assets/css/bootstrap-default.css' rel='stylesheet'>";
-			echo "<link href='assets/css/chat-default.css' rel='stylesheet'>";
+			echo "<link href='assets/css/chat-default.css' rel='stylesheet'>
+			<link href='assets/css/main-default.css' rel='stylesheet'>";
 		}
 	?>
     <title>Chatroom | Výpisky</title>
 	
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/main.css" rel="stylesheet">
 	<script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
   </head>
@@ -58,7 +61,7 @@
 							<input type="submit" value=">>>" class="btn btn-primary mb-2"></input>
 						</form>
 					
-						<div id="drop" class="btn-group dropup">
+						<div id="drop" class="btn-group dropup septop">
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Obrázek
 								<span class="caret"></span>
@@ -68,12 +71,12 @@
 									<li><span class="info">Je povoleno nahrávat obrázky do velikosti<br> 5 MB typu jpg, png a gif.<span><br><br></li>
 									<li><input type="file" id="file" name="obrazky" required data-keepOpenOnClick class="btn btn-block btn-default"><br></li>
 									<li><button id='process-file-button' class="btn btn-primary mb-2">Nahrát</button></li>
-									<div class="progress">
+									<!--<div class="progress">
 										<div class="progress-bar" role="progressbar" aria-valuenow="70"
 										aria-valuemin="0" aria-valuemax="100" style="width:0%">
 											WIP
 										</div>
-									</div> 
+									</div> -->
 								</div>
 							</ul>						
 						</div>
@@ -175,9 +178,9 @@
 					console.log(err);
 				}
 			});
+			mm = "1";
 			document.getElementById("file").value = "";
-		});
-						
+		});				
 	</script>
 	
 	<script>
